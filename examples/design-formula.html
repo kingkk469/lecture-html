@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>讲课 HTML 设计公式 | 数字生命 KING</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Cinzel:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-0:#020208; --bg-1:#0a0817; --bg-2:#15101f;
+  --paper:#ebe5d5; --cream:#d6cdb3;
+  --gold-d:#8a6a32; --gold:#c8a35c; --gold-l:#e8d4a0; --gold-3:#f3d678;
+  --red:#d84a3a; --red-d:#a8302c;
+  --muted:#8a8070; --dim:#5c5648;
+  --line:rgba(200,163,92,0.18);
+  --f-serif:"Noto Serif SC","PingFang SC",serif;
+  --f-sans:"Noto Sans SC","PingFang SC",sans-serif;
+  --f-num:"Cinzel",Georgia,serif;
+  --f-mono:"JetBrains Mono",Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg-0)}
+body{font-family:var(--f-serif);color:var(--paper);-webkit-font-smoothing:antialiased;user-select:none}
+
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url('../images/bg-stage.jpg');
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+}
+@media (max-aspect-ratio:1/1){
+  body::before{
+    background-image:url('../images/bg-tile.jpg');
+    background-size:min(50vh,90vw) auto;background-repeat:repeat;
+  }
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 75% 65% at center,rgba(0,0,0,0.15) 0%,transparent 80%);
+}
+
+.deck{position:fixed;inset:0;z-index:1}
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:6vh 8vw;opacity:0;visibility:hidden;transform:translateY(20px);
+  transition:opacity 0.5s ease,transform 0.5s cubic-bezier(.22,.61,.36,1);
+}
+.slide.active{opacity:1;visibility:visible;transform:translateY(0)}
+
+.eyebrow{
+  font-size:clamp(1.1rem,1.6vw,1.5rem);
+  color:var(--gold);letter-spacing:0.4em;text-align:center;
+  margin-bottom:3vh;font-weight:500;text-transform:uppercase;
+}
+.eyebrow .num{font-family:var(--f-num);color:var(--gold-3);margin-right:0.6em;font-weight:600}
+
+h1.title{
+  font-size:clamp(2.4rem,5.5vw,4.5rem);font-weight:700;line-height:1.25;
+  text-align:center;color:var(--paper);margin-bottom:2vh;
+}
+h2.subtitle{
+  font-size:clamp(1.4rem,2.6vw,2.2rem);text-align:center;color:var(--cream);
+  font-weight:400;line-height:1.5;margin-top:1.5vh;
+}
+.caption{
+  font-size:clamp(1rem,1.6vw,1.4rem);color:var(--cream);text-align:center;
+  margin-top:2vh;line-height:1.6;
+}
+.caption-sm{
+  font-size:clamp(0.9rem,1.3vw,1.1rem);color:var(--muted);text-align:center;
+  margin-top:1.5vh;line-height:1.6;
+}
+
+.bignum{
+  font-family:var(--f-num);font-size:clamp(5rem,16vw,14rem);font-weight:600;
+  line-height:0.95;color:var(--gold);text-shadow:0 0 60px rgba(200,163,92,0.3);
+  letter-spacing:-0.02em;text-align:center;
+}
+.quote-big{
+  font-size:clamp(2rem,4.2vw,3.5rem);text-align:center;line-height:1.55;
+  font-weight:500;color:var(--paper);
+}
+.quote-big .em{color:var(--gold-3);font-weight:700}
+.quote-big .red{color:var(--red);font-weight:700}
+.quote-mid{
+  font-size:clamp(1.5rem,2.8vw,2.4rem);text-align:center;line-height:1.6;color:var(--cream);
+}
+.quote-mid .em{color:var(--gold-3)}
+
+.list-big{
+  text-align:center;font-size:clamp(1.3rem,2.3vw,1.9rem);line-height:2.2;color:var(--cream);
+}
+.list-big li{list-style:none;margin:0.3em 0}
+.list-big .em{color:var(--gold-3);font-weight:700}
+.list-big .num{font-family:var(--f-num);color:var(--gold);font-weight:600;margin-right:0.5em}
+
+/* 配色 / 字体 / 间距展示卡 */
+.system-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,3rem);
+  max-width:1200px;margin:3vh auto;
+}
+.system-card{
+  text-align:center;padding:clamp(1.5rem,2.5vw,2.5rem);
+  border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,0.02);
+}
+.system-card h3{
+  font-family:var(--f-serif);font-size:clamp(1.1rem,1.7vw,1.4rem);
+  color:var(--gold-l);margin-bottom:1.2em;letter-spacing:0.15em;
+}
+.swatch{
+  display:flex;align-items:center;gap:0.8em;font-size:clamp(0.85rem,1.2vw,1rem);
+  margin:0.5em 0;color:var(--cream);font-family:var(--f-mono);
+}
+.swatch-color{
+  width:24px;height:24px;border-radius:4px;flex-shrink:0;border:1px solid var(--line);
+}
+
+.font-sample{margin:0.5em 0;text-align:left;color:var(--cream)}
+.font-name{font-size:0.8rem;color:var(--gold-d);letter-spacing:0.1em;margin-bottom:0.3em}
+.font-display{font-size:clamp(1.1rem,1.6vw,1.4rem)}
+
+/* 8 种 slide 类型概览 */
+.types-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(0.8rem,1.5vw,1.5rem);
+  max-width:1200px;margin:3vh auto;
+}
+.type-card{
+  text-align:center;padding:clamp(0.9rem,1.5vw,1.5rem);
+  border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,0.02);
+}
+.type-num{
+  font-family:var(--f-num);font-size:clamp(1.8rem,3vw,2.4rem);
+  color:var(--gold);font-weight:600;line-height:1;
+}
+.type-name{
+  font-size:clamp(0.95rem,1.4vw,1.15rem);color:var(--paper);
+  margin-top:0.6em;font-weight:600;
+}
+.type-en{
+  font-family:var(--f-mono);font-size:clamp(0.7rem,1vw,0.85rem);
+  color:var(--muted);margin-top:0.3em;letter-spacing:0.05em;
+}
+
+/* 代码块 */
+.code-block{
+  font-family:var(--f-mono);font-size:clamp(0.7rem,1vw,0.92rem);
+  color:var(--cream);text-align:left;background:rgba(0,0,0,0.55);
+  border:1px solid var(--line);border-radius:8px;
+  padding:clamp(1rem,1.8vw,1.6rem);line-height:1.7;
+  max-width:900px;width:90%;margin:2vh auto;
+  white-space:pre;overflow-x:auto;
+}
+.code-block .tag{color:#e06c75}
+.code-block .attr{color:var(--gold-3)}
+.code-block .str{color:var(--gold-l)}
+.code-block .com{color:var(--muted);font-style:italic}
+.code-block .key{color:#c678dd}
+
+/* 示例 vs 对比 */
+.vs{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(2rem,5vw,4rem);
+  align-items:center;margin:4vh 0;
+}
+.vs-side{text-align:center}
+.vs-name{font-size:clamp(1.2rem,2vw,1.8rem);color:var(--cream);margin-bottom:0.8em;letter-spacing:0.1em}
+.vs-num{font-family:var(--f-num);font-size:clamp(2rem,5vw,4rem);font-weight:600;line-height:1}
+.vs-num.win{color:var(--gold-3)}
+.vs-num.lose{color:var(--muted)}
+.vs-mid{font-family:var(--f-num);font-size:clamp(1.6rem,3vw,2.5rem);color:var(--red);font-weight:600}
+
+/* 工作流步骤 */
+.workflow{
+  display:flex;flex-direction:column;gap:clamp(1.2rem,2vw,2rem);
+  max-width:900px;margin:2vh auto;
+}
+.workflow-step{
+  display:flex;align-items:center;gap:clamp(1rem,2vw,2rem);
+  padding:clamp(1rem,1.8vw,1.6rem) clamp(1.4rem,2.5vw,2.2rem);
+  border-left:3px solid var(--gold);background:rgba(255,255,255,0.02);
+  border-radius:0 8px 8px 0;
+}
+.workflow-num{
+  font-family:var(--f-num);font-size:clamp(2rem,3.5vw,2.8rem);
+  color:var(--gold);font-weight:600;flex-shrink:0;
+}
+.workflow-content h4{
+  font-size:clamp(1.1rem,1.7vw,1.4rem);color:var(--paper);margin-bottom:0.3em;font-weight:600;
+}
+.workflow-content p{
+  font-size:clamp(0.9rem,1.3vw,1.05rem);color:var(--muted);line-height:1.6;
+}
+.workflow-content code{
+  font-family:var(--f-mono);color:var(--gold-l);font-size:0.92em;
+  background:rgba(0,0,0,0.3);padding:0.1em 0.4em;border-radius:3px;
+}
+
+/* 封面 */
+.slide-cover{background:radial-gradient(ellipse at center,rgba(21,16,31,0.25) 0%,rgba(2,2,8,0.5) 80%)}
+.cover-eyebrow{
+  font-family:var(--f-serif);font-size:clamp(0.95rem,1.4vw,1.2rem);
+  color:var(--gold);letter-spacing:0.4em;margin-bottom:3vh;text-align:center;
+}
+.cover-title{
+  font-family:var(--f-serif);font-size:clamp(2.5rem,6vw,5rem);
+  font-weight:700;color:var(--paper);text-align:center;letter-spacing:0.12em;
+  line-height:1.2;margin-bottom:3vh;
+}
+.cover-title .gold{color:var(--gold-3)}
+.cover-motto{
+  font-style:italic;color:var(--cream);text-align:center;
+  font-size:clamp(1.2rem,2.2vw,1.7rem);letter-spacing:0.08em;margin-top:3vh;
+}
+.cover-by{
+  font-family:var(--f-num);color:var(--gold-d);font-size:clamp(0.9rem,1.3vw,1.1rem);
+  margin-top:1.5vh;letter-spacing:0.25em;text-align:center;
+}
+
+/* 控件 */
+.controls{
+  position:fixed;bottom:24px;left:0;right:0;
+  display:flex;justify-content:space-between;padding:0 32px;
+  pointer-events:none;z-index:100;font-family:var(--f-sans);
+}
+.hint{font-size:0.78rem;color:var(--muted);letter-spacing:0.1em}
+.progress{
+  font-family:var(--f-num);font-size:0.95rem;color:var(--gold-d);
+  font-weight:600;letter-spacing:0.15em;
+}
+.progress-bar{
+  position:fixed;top:0;left:0;height:3px;width:0;z-index:101;
+  background:linear-gradient(90deg,var(--gold-d),var(--gold),var(--gold-3));
+  transition:width 0.5s ease;
+}
+
+/* 全局品牌区 */
+.brand-fix{
+  position:fixed;bottom:5.5vh;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:clamp(0.9rem,1.5vw,1.5rem);
+  pointer-events:none;z-index:50;
+}
+.brand-fix img{
+  width:clamp(40px,4vw,60px);height:auto;opacity:0.85;
+  filter:drop-shadow(0 0 18px rgba(200,163,92,0.18));
+}
+.brand-fix .brand-text{
+  font-family:var(--f-serif);font-size:clamp(0.95rem,1.3vw,1.2rem);
+  color:var(--gold-l);letter-spacing:0.25em;padding-left:0.25em;
+  white-space:nowrap;font-weight:500;
+}
+
+/* 转场动画 */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.slide.active>*{animation:fadeUp 0.7s cubic-bezier(.22,.61,.36,1) backwards}
+.slide.active>*:nth-child(1){animation-delay:0.1s}
+.slide.active>*:nth-child(2){animation-delay:0.22s}
+.slide.active>*:nth-child(3){animation-delay:0.34s}
+.slide.active>*:nth-child(4){animation-delay:0.46s}
+.slide.active>*:nth-child(5){animation-delay:0.58s}
+
+@media (max-aspect-ratio:1/1){
+  .types-grid{grid-template-columns:repeat(2,1fr)}
+  .system-grid{grid-template-columns:1fr;gap:1.5rem}
+  .vs{grid-template-columns:1fr;gap:1.5rem}
+  .vs-mid{transform:rotate(90deg)}
+  .brand-fix img{width:clamp(32px,8vw,46px)}
+  .brand-fix .brand-text{font-size:clamp(0.85rem,2.6vw,1rem);letter-spacing:0.15em}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="deck">
+
+<!-- ============ 1. COVER ============ -->
+<section class="slide active slide-cover">
+  <div class="cover-eyebrow">数字生命 KING · 内部方法</div>
+  <h1 class="cover-title">讲课 <span class="gold">HTML</span> 设计公式</h1>
+  <div class="cover-motto">10 分钟做出能讲、能发、能传的 PPT</div>
+  <div class="cover-by">— 写给所有想自己做课的人 —</div>
+</section>
+
+<!-- ============ 2. WHY HTML ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="num">01</span>为什么不用 PowerPoint?</div>
+  <div class="vs">
+    <div class="vs-side">
+      <div class="vs-name" style="color:var(--muted)">PowerPoint</div>
+      <ul class="list-big" style="font-size:clamp(1rem,1.5vw,1.3rem);text-align:left;color:var(--muted);line-height:2">
+        <li>文件大 · 版本兼容差</li>
+        <li>换设备字体经常丢</li>
+        <li>不能发链接 · 只能发文件</li>
+        <li>修改一处 · 重新发一遍</li>
+        <li>学生体验不一致</li>
+      </ul>
+    </div>
+    <div class="vs-mid">VS</div>
+    <div class="vs-side">
+      <div class="vs-name" style="color:var(--gold-3)">HTML</div>
+      <ul class="list-big" style="font-size:clamp(1rem,1.5vw,1.3rem);text-align:left;color:var(--cream);line-height:2">
+        <li>纯文本 · 几十 KB</li>
+        <li>任何设备打开样式一致</li>
+        <li>可发链接 · 可嵌入</li>
+        <li>修改一次 · 所有人立刻看到</li>
+        <li>可复制 · 可二次创作</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. 三条哲学 ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="num">02</span>三条设计哲学</div>
+  <ul class="list-big">
+    <li><span class="num">①</span><span class="em">一页一个核心</span> · 不堆信息 · 信息密度比 PPT 低 30%</li>
+    <li><span class="num">②</span><span class="em">大字号高对比</span> · 后排能看清 · 投影到大屏不糊</li>
+    <li><span class="num">③</span><span class="em">克制 + 留白</span> · 装饰只在角落 · 主体大段留黑</li>
+  </ul>
+  <div class="caption">如果不知道一页放什么 — 删掉一半 · 再看一遍</div>
+</section>
+
+<!-- ============ 4. 视觉系统 ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="num">03</span>视觉系统 · 一眼看完</div>
+  <div class="system-grid">
+    <div class="system-card">
+      <h3>配色</h3>
+      <div class="swatch"><div class="swatch-color" style="background:#020208"></div><span>#020208 obsidian</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#c8a35c"></div><span>#c8a35c gold</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#f3d678"></div><span>#f3d678 gold-3</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#d84a3a"></div><span>#d84a3a red</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#ebe5d5"></div><span>#ebe5d5 paper</span></div>
+    </div>
+    <div class="system-card">
+      <h3>字体</h3>
+      <div class="font-sample">
+        <div class="font-name">SERIF · 标题正文</div>
+        <div class="font-display" style="font-family:var(--f-serif)">Noto Serif SC 思源宋体</div>
+      </div>
+      <div class="font-sample">
+        <div class="font-name">SANS · 辅助标签</div>
+        <div class="font-display" style="font-family:var(--f-sans)">Noto Sans SC 思源黑体</div>
+      </div>
+      <div class="font-sample">
+        <div class="font-name">NUM · 数字英文</div>
+        <div class="font-display" style="font-family:var(--f-num);color:var(--gold)">2026 · GOLD</div>
+      </div>
+      <div class="font-sample">
+        <div class="font-name">MONO · 代码</div>
+        <div class="font-display" style="font-family:var(--f-mono);font-size:0.9rem">JetBrains Mono</div>
+      </div>
+    </div>
+    <div class="system-card">
+      <h3>间距</h3>
+      <div class="swatch" style="font-size:0.9rem"><span style="color:var(--gold)">slide padding</span></div>
+      <div class="swatch" style="font-size:0.9rem"><code style="font-family:var(--f-mono);color:var(--cream)">6vh 8vw</code></div>
+      <div class="swatch" style="font-size:0.9rem;margin-top:1em"><span style="color:var(--gold)">字号</span></div>
+      <div class="swatch" style="font-size:0.85rem"><code style="font-family:var(--f-mono);color:var(--cream)">clamp(min, vw, max)</code></div>
+      <div class="swatch" style="font-size:0.9rem;margin-top:1em"><span style="color:var(--gold)">行高</span></div>
+      <div class="swatch" style="font-size:0.9rem"><code style="font-family:var(--f-mono);color:var(--cream)">1.6 ~ 2.0</code></div>
+    </div>
+  </div>
+  <div class="caption-sm">所有变量定义在 <code style="font-family:var(--f-mono);color:var(--gold-l)">:root { ... }</code> · 改一处 · 全站统一</div>
+</section>
+
+<!-- ============ 5. 8 种 SLIDE 类型 ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="num">04</span>8 种 SLIDE 类型 · 覆盖 95% 场景</div>
+  <div class="types-grid">
+    <div class="type-card"><div class="type-num">1</div><div class="type-name">封面</div><div class="type-en">cover</div></div>
+    <div class="type-card"><div class="type-num">2</div><div class="type-name">章节标题</div><div class="type-en">title</div></div>
+    <div class="type-card"><div class="type-num">3</div><div class="type-name">大数字</div><div class="type-en">bignum</div></div>
+    <div class="type-card"><div class="type-num">4</div><div class="type-name">时间轴</div><div class="type-en">timeline</div></div>
+    <div class="type-card"><div class="type-num">5</div><div class="type-name">对比</div><div class="type-en">vs</div></div>
+    <div class="type-card"><div class="type-num">6</div><div class="type-name">列表</div><div class="type-en">list</div></div>
+    <div class="type-card"><div class="type-num">7</div><div class="type-name">卡片</div><div class="type-en">card</div></div>
+    <div class="type-card"><div class="type-num">8</div><div class="type-name">金句</div><div class="type-en">quote</div></div>
+  </div>
+  <div class="caption">想表达什么? — 选对应的类型 · 改字 · 完事</div>
+</section>
+
+<!-- ============ 6. 示例 · 大数字 ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="num">类型 3</span>大数字 BIGNUM · 用于让数据说话</div>
+  <div class="bignum" style="font-size:clamp(4rem,12vw,10rem)">2000 亿</div>
+  <div class="caption">字节跳动 2026 AI 资本开支 · 比年初 +25%</div>
+  <div class="code-block" style="margin-top:3vh">
+<span class="com">&lt;!-- 大数字页 · 复制即用 --&gt;</span>
+&lt;<span class="tag">section</span> <span class="attr">class</span>=<span class="str">"slide"</span>&gt;
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="str">"eyebrow"</span>&gt;标签文字&lt;/<span class="tag">div</span>&gt;
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="str">"bignum"</span>&gt;<span class="str">2000 亿</span>&lt;/<span class="tag">div</span>&gt;
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="str">"caption"</span>&gt;副标题说明&lt;/<span class="tag">div</span>&gt;
+&lt;/<span class="tag">section</span>&gt;
+  </div>
+</section>
+
+<!-- ============ 7. 示例 · 对比 ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="num">类型 5</span>对比 VS · 用于呈现差异</div>
+  <div class="vs" style="margin:2vh 0">
+    <div class="vs-side">
+      <div class="vs-name">Anthropic</div>
+      <div class="vs-num win">1.2 万亿</div>
+    </div>
+    <div class="vs-mid">VS</div>
+    <div class="vs-side">
+      <div class="vs-name">OpenAI</div>
+      <div class="vs-num lose">8520 亿</div>
+    </div>
+  </div>
+  <div class="code-block">
+<span class="com">&lt;!-- 对比页 · 左右两侧 + 中间 VS --&gt;</span>
+&lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="str">"vs"</span>&gt;
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="str">"vs-side"</span>&gt;
+    &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="str">"vs-name"</span>&gt;A 方&lt;/<span class="tag">div</span>&gt;
+    &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="str">"vs-num win"</span>&gt;赢家数据&lt;/<span class="tag">div</span>&gt;
+  &lt;/<span class="tag">div</span>&gt;
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="str">"vs-mid"</span>&gt;VS&lt;/<span class="tag">div</span>&gt;
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="str">"vs-side"</span>&gt;...&lt;/<span class="tag">div</span>&gt;
+&lt;/<span class="tag">div</span>&gt;
+  </div>
+</section>
+
+<!-- ============ 8. 示例 · 列表 / 金句 ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="num">类型 6 / 8</span>列表 LIST · 金句 QUOTE</div>
+  <ul class="list-big" style="font-size:clamp(1.1rem,2vw,1.6rem);margin-bottom:4vh">
+    <li><span class="num">①</span>核心要点 <span class="em">一</span></li>
+    <li><span class="num">②</span>核心要点 <span class="em">二</span></li>
+    <li><span class="num">③</span>核心要点 <span class="em">三</span></li>
+  </ul>
+  <div class="quote-mid" style="font-size:clamp(1.3rem,2.4vw,2rem)">
+    重点的话 · 用<span class="em">金色</span>突出 · 节奏停顿用 <span class="em">·</span> 分隔
+  </div>
+</section>
+
+<!-- ============ 9. 图片素材生成 ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="num">05</span>图片素材 · gpt-image-2 公式</div>
+  <h1 class="title" style="font-size:clamp(2rem,3.5vw,2.8rem);margin-bottom:3vh">背景 / Logo / 装饰图 · 一个 prompt 搞定</h1>
+  <div class="code-block" style="max-width:1000px;font-size:clamp(0.78rem,1.05vw,0.95rem)">
+<span class="com"># prompt 公式</span>
+<span class="key">[尺寸/形状]</span>      <span class="com">→ Square 1:1  /  Horizontal 3:2  /  Vertical 2:3</span>
+<span class="key">[基底]</span>          <span class="com">→ near-black obsidian #020208 / pure black background</span>
+<span class="key">[主体]</span>          <span class="com">→ what you want as the focal element (or "no center subject")</span>
+<span class="key">[装饰]</span>          <span class="com">→ chinese cloud / circuit / arc / constellation / seal at edges</span>
+<span class="key">[留白要求]</span>      <span class="com">→ center 60% kept dark and empty for text overlay</span>
+<span class="key">[禁止]</span>          <span class="com">→ NO text, NO people, NO faces, NO logos</span>
+<span class="key">[质感]</span>          <span class="com">→ premium luxurious, museum-quality, 4K ultra detailed</span>
+  </div>
+  <div class="caption-sm" style="margin-top:3vh">详见 <code style="font-family:var(--f-mono);color:var(--gold-l)">generate_images.py</code> · 改 TASKS 列表即可批量生成</div>
+</section>
+
+<!-- ============ 10. 工作流 ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="num">06</span>完整产出流程 · 5 步</div>
+  <div class="workflow">
+    <div class="workflow-step">
+      <div class="workflow-num">1</div>
+      <div class="workflow-content">
+        <h4>写讲稿要点(markdown)</h4>
+        <p>每一页一个核心观点 · 一行话能讲清楚再开始做 slide</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-num">2</div>
+      <div class="workflow-content">
+        <h4>选 slide 类型 · 复制模板</h4>
+        <p>从 <code>8 种类型</code> 里挑 · 复制 HTML 片段 · 改成自己的字</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-num">3</div>
+      <div class="workflow-content">
+        <h4>跑图片素材</h4>
+        <p>背景图 / logo / 装饰用 <code>gpt-image-2</code> 批量生成</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-num">4</div>
+      <div class="workflow-content">
+        <h4>加品牌条 + 翻页 JS</h4>
+        <p>右下 logo + 课程名 + 左右键翻页 · 一次写完所有 slide 共享</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-num">5</div>
+      <div class="workflow-content">
+        <h4>F 全屏 · 开讲</h4>
+        <p>浏览器打开 · 按 <code>F</code> 全屏 · 方向键 / 空格翻页</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11. 设计原则 vs 反例 ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="num">07</span>三个该避免的坑</div>
+  <ul class="list-big" style="font-size:clamp(1.2rem,2vw,1.6rem)">
+    <li><span class="red" style="color:var(--red);font-weight:700;margin-right:0.5em">✗</span><span style="color:var(--muted)">用 emoji 做图标</span> · 跨平台渲染不一致 · 用<span class="em">几何字符 ★ ① ◆</span></li>
+    <li><span class="red" style="color:var(--red);font-weight:700;margin-right:0.5em">✗</span><span style="color:var(--muted)">一页堆 5 个论点</span> · 投影时学生看不过来 · <span class="em">拆成 5 页</span></li>
+    <li><span class="red" style="color:var(--red);font-weight:700;margin-right:0.5em">✗</span><span style="color:var(--muted)">字号 16px 看 PPT</span> · 后排根本看不清 · 标题 ≥ <span class="em">3rem</span></li>
+  </ul>
+  <div class="quote-mid" style="margin-top:5vh;color:var(--gold-l)">
+    讲课 PPT 不是 Word 文档 · <span class="em">一页一句话 · 就够了</span>
+  </div>
+</section>
+
+<!-- ============ 12. ENDING ============ -->
+<section class="slide slide-cover">
+  <div class="cover-eyebrow">现在轮到你</div>
+  <h1 class="cover-title">开始你的<br><span class="gold">下一节课</span></h1>
+  <div class="cover-motto" style="margin-top:5vh">这套公式 · 你自由使用</div>
+  <div class="cover-by" style="margin-top:2vh">— 改了发我看 —</div>
+</section>
+
+</div>
+
+<!-- 全局品牌区 -->
+<div class="brand-fix">
+  <img src="../images/logo.png" alt="乘势 logo">
+  <span class="brand-text">乘势 AI 商业实战课</span>
+</div>
+
+<div class="controls">
+  <div class="hint">← → 翻页 · 空格下一页 · F 全屏</div>
+  <div class="progress" id="progress">1 / 1</div>
+</div>
+
+<script>
+let current = 0;
+const slides = Array.from(document.querySelectorAll('.slide'));
+const total = slides.length;
+const progress = document.getElementById('progress');
+const progressBar = document.getElementById('progressBar');
+
+function show(n){
+  if(n<0||n>=total)return;
+  slides[current].classList.remove('active');
+  current=n;
+  slides[current].classList.add('active');
+  progress.textContent=`${current+1} / ${total}`;
+  progressBar.style.width=`${((current+1)/total)*100}%`;
+}
+function next(){show(Math.min(current+1,total-1))}
+function prev(){show(Math.max(current-1,0))}
+
+document.addEventListener('keydown',e=>{
+  switch(e.key){
+    case 'ArrowRight':case ' ':case 'PageDown':case 'Enter':e.preventDefault();next();break;
+    case 'ArrowLeft':case 'PageUp':case 'Backspace':e.preventDefault();prev();break;
+    case 'Home':e.preventDefault();show(0);break;
+    case 'End':e.preventDefault();show(total-1);break;
+    case 'f':case 'F':e.preventDefault();
+      if(!document.fullscreenElement){document.documentElement.requestFullscreen?.()}
+      else{document.exitFullscreen?.()}
+      break;
+  }
+});
+
+document.addEventListener('click',e=>{
+  if(e.target.tagName==='A'||e.target.tagName==='BUTTON')return;
+  const w=window.innerWidth;
+  if(e.clientX<w/4)prev();else next();
+});
+
+let touchX=0;
+document.addEventListener('touchstart',e=>{touchX=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-touchX;
+  if(dx>60)prev();else if(dx<-60)next();
+},{passive:true});
+
+show(0);
+</script>
+
+</body>
+</html>

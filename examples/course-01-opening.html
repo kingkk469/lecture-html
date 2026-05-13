@@ -1,0 +1,1251 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第〇章 · 开课导言 | 乘势 AI 商业实战课</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-0:#060410;
+  --bg-1:#0a0817;
+  --bg-2:#15101f;
+  --bg-3:#1f1730;
+  --paper:#ebe5d5;
+  --cream:#d6cdb3;
+  --gold-d:#8a6a32;
+  --gold:#c8a35c;
+  --gold-l:#e8d4a0;
+  --gold-3:#f3d678;
+  --red:#d84a3a;
+  --red-d:#a8302c;
+  --green:#4caf50;
+  --muted:#8a8070;
+  --dim:#5c5648;
+  --line:rgba(200,163,92,0.18);
+
+  --f-serif:"Noto Serif SC","Source Han Serif SC","STSong",serif;
+  --f-sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --f-num:"Cinzel","Cormorant Garamond",Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg-0)}
+body{
+  font-family:var(--f-serif);
+  color:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  user-select:none;
+  cursor:default;
+}
+
+/* 横屏(电脑/平板横屏):用 bg-stage-v2.jpg,深色高级版 */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background-image:url('../images/bg-stage.jpg');
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  opacity:1;
+}
+/* 竖屏(手机/平板竖屏):用 bg-tile-v2.jpg,无缝平铺 */
+@media (max-aspect-ratio:1/1){
+  body::before{
+    background-image:url('../images/bg-tile.jpg');
+    background-size:min(50vh,90vw) auto;
+    background-repeat:repeat;
+  }
+}
+/* 中心轻微 vignette,保证白字清晰 */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:radial-gradient(ellipse 75% 65% at center,rgba(0,0,0,0.15) 0%,transparent 80%);
+}
+
+/* slide 容器 */
+.deck{
+  position:fixed;
+  inset:0;
+  z-index:1;
+}
+.slide{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:6vh 8vw;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 0.5s ease,transform 0.5s cubic-bezier(.22,.61,.36,1);
+  transform:translateY(20px);
+}
+.slide.active{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
+/* 通用样式 */
+.eyebrow{
+  font-size:clamp(1.1rem,1.6vw,1.5rem);
+  color:var(--gold);
+  letter-spacing:0.4em;
+  margin-bottom:3vh;
+  text-transform:uppercase;
+  font-weight:500;
+  text-align:center;
+}
+.eyebrow .num{
+  font-family:var(--f-num);
+  color:var(--gold-3);
+  margin-right:0.6em;
+  font-weight:600;
+}
+
+h1.title{
+  font-size:clamp(2.4rem,5.5vw,5rem);
+  font-weight:700;
+  text-align:center;
+  line-height:1.25;
+  color:var(--paper);
+  margin-bottom:2vh;
+}
+h2.subtitle{
+  font-size:clamp(1.4rem,2.6vw,2.4rem);
+  text-align:center;
+  color:var(--cream);
+  font-weight:400;
+  line-height:1.5;
+  margin-top:1.5vh;
+}
+
+.bignum{
+  font-family:var(--f-num);
+  font-size:clamp(5rem,16vw,14rem);
+  font-weight:600;
+  line-height:0.95;
+  color:var(--gold);
+  text-shadow:0 0 60px rgba(200,163,92,0.3);
+  letter-spacing:-0.02em;
+  text-align:center;
+}
+.bignum.red{color:var(--red);text-shadow:0 0 60px rgba(216,74,58,0.3)}
+.bignum.cream{color:var(--paper);text-shadow:0 0 60px rgba(235,229,213,0.2)}
+
+.label{
+  font-size:clamp(1.1rem,2vw,1.6rem);
+  color:var(--gold-l);
+  text-align:center;
+  letter-spacing:0.15em;
+  margin-bottom:1.5vh;
+}
+.caption{
+  font-size:clamp(1rem,1.6vw,1.4rem);
+  color:var(--cream);
+  text-align:center;
+  margin-top:2vh;
+  line-height:1.6;
+}
+.caption-sm{
+  font-size:clamp(0.9rem,1.3vw,1.1rem);
+  color:var(--muted);
+  text-align:center;
+  margin-top:1.5vh;
+  line-height:1.6;
+}
+
+.quote-big{
+  font-size:clamp(2rem,4.5vw,4rem);
+  text-align:center;
+  line-height:1.5;
+  font-weight:500;
+  color:var(--paper);
+}
+.quote-big .em{color:var(--gold-3);font-weight:700}
+.quote-big .red{color:var(--red);font-weight:700}
+
+.quote-mid{
+  font-size:clamp(1.5rem,3vw,2.8rem);
+  text-align:center;
+  line-height:1.6;
+  color:var(--cream);
+}
+.quote-mid .em{color:var(--gold-3)}
+.quote-mid .red{color:var(--red)}
+
+/* 时间轴 */
+.timeline{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(2rem,5vw,5rem);
+  margin:4vh 0;
+  flex-wrap:wrap;
+}
+.tl-item{
+  text-align:center;
+}
+.tl-date{
+  font-size:clamp(1rem,1.5vw,1.3rem);
+  color:var(--muted);
+  margin-bottom:0.8em;
+  letter-spacing:0.1em;
+}
+.tl-val{
+  font-family:var(--f-num);
+  font-size:clamp(2.5rem,7vw,6rem);
+  font-weight:600;
+  color:var(--gold);
+  line-height:1;
+}
+.tl-arrow{
+  font-size:clamp(2.5rem,5vw,4rem);
+  color:var(--gold-d);
+}
+
+/* 对比 */
+.vs{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:clamp(2rem,5vw,5rem);
+  align-items:center;
+  margin:4vh 0;
+}
+.vs-side{
+  text-align:center;
+}
+.vs-name{
+  font-size:clamp(1.4rem,2.6vw,2.2rem);
+  color:var(--cream);
+  margin-bottom:0.8em;
+  letter-spacing:0.1em;
+}
+.vs-num{
+  font-family:var(--f-num);
+  font-size:clamp(3rem,8vw,7rem);
+  font-weight:600;
+  line-height:1;
+}
+.vs-num.win{color:var(--gold-3)}
+.vs-num.lose{color:var(--muted)}
+.vs-mid{
+  font-family:var(--f-num);
+  font-size:clamp(2rem,4vw,3.5rem);
+  color:var(--red);
+  font-weight:600;
+}
+
+/* 列表 */
+.list-big{
+  text-align:center;
+  font-size:clamp(1.4rem,2.5vw,2rem);
+  line-height:2.2;
+  color:var(--cream);
+}
+.list-big li{
+  list-style:none;
+  margin:0.4em 0;
+}
+.list-big .em{color:var(--gold-3);font-weight:700}
+.list-big .num{
+  font-family:var(--f-num);
+  color:var(--gold);
+  font-weight:600;
+  margin-right:0.5em;
+}
+
+.list-arrow{
+  text-align:center;
+  font-size:clamp(1.4rem,2.5vw,2rem);
+  line-height:2;
+  color:var(--cream);
+}
+.list-arrow .arrow{
+  display:block;
+  color:var(--gold);
+  font-size:0.8em;
+  margin:0.4em 0;
+}
+
+/* 三栏 */
+.three-col{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:clamp(2rem,4vw,4rem);
+  max-width:1200px;
+  margin:4vh auto;
+}
+.col-card{
+  text-align:center;
+  padding:clamp(1.5rem,2.5vw,2.5rem);
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:rgba(255,255,255,0.02);
+}
+.col-card.primary{
+  border:2px solid var(--gold);
+  background:rgba(200,163,92,0.08);
+}
+.col-medal{
+  font-size:clamp(2.5rem,5vw,4.5rem);
+  margin-bottom:1vh;
+}
+.col-title{
+  font-size:clamp(1.2rem,2vw,1.7rem);
+  color:var(--paper);
+  font-weight:700;
+  margin-bottom:0.5em;
+}
+.col-desc{
+  font-size:clamp(0.95rem,1.4vw,1.2rem);
+  color:var(--muted);
+  line-height:1.6;
+}
+
+/* 春晚特殊 */
+.cny-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:clamp(1.5rem,3vw,3rem);
+  margin:3vh 0;
+}
+.cny-card{
+  text-align:center;
+  padding:clamp(1rem,2vw,2rem);
+}
+.cny-brand{
+  font-size:clamp(1.4rem,2.4vw,2rem);
+  color:var(--gold-3);
+  font-weight:700;
+  margin-bottom:0.5em;
+}
+.cny-act{
+  font-size:clamp(1rem,1.5vw,1.3rem);
+  color:var(--cream);
+}
+.cny-list{
+  font-size:clamp(1.1rem,1.8vw,1.5rem);
+  color:var(--muted);
+  text-align:center;
+  margin-top:2vh;
+  letter-spacing:0.05em;
+}
+.cny-list span{color:var(--gold-3);font-weight:600;margin:0 0.3em}
+
+/* roadmap */
+.roadmap{
+  font-family:var(--f-sans);
+  font-size:clamp(0.95rem,1.4vw,1.2rem);
+  line-height:2;
+  text-align:left;
+  color:var(--cream);
+  padding:2rem;
+  border-radius:8px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--line);
+  max-width:680px;
+}
+.roadmap .stage{
+  display:flex;
+  align-items:center;
+  gap:1em;
+}
+.roadmap .stage-num{
+  font-family:var(--f-num);
+  color:var(--gold);
+  font-weight:600;
+  width:2em;
+}
+.roadmap .star{color:var(--red);font-weight:700}
+.roadmap .here{
+  color:var(--gold-3);
+  font-weight:700;
+  margin-left:0.5em;
+}
+.roadmap .desc{
+  color:var(--muted);
+  font-size:0.85em;
+  margin-left:3em;
+}
+
+/* 开场封面 — 跟其他 slide 用同一个全局 bg-stage-v2 底图 */
+.slide-opening{
+  background:transparent;
+  align-items:center;
+  text-align:center;
+}
+.slide-cover{
+  background:transparent;
+}
+
+/* 品牌区:logo + 课程名 — 全局固定底部居中,所有 slide 共享 */
+.opening-brand{
+  position:fixed;
+  bottom:5.5vh;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:clamp(0.9rem,1.5vw,1.5rem);
+  pointer-events:none;
+  z-index:50;
+}
+.opening-brand img{
+  width:clamp(54px,5.5vw,90px);
+  height:auto;
+  opacity:0.95;
+  filter:drop-shadow(0 0 24px rgba(200,163,92,0.22));
+}
+.opening-brand .brand-text{
+  font-family:var(--f-serif);
+  font-size:clamp(1.15rem,1.7vw,1.55rem);
+  color:var(--gold-l);
+  letter-spacing:0.32em;
+  padding-left:0.32em;
+  white-space:nowrap;
+  font-weight:500;
+}
+@media (max-aspect-ratio:1/1){
+  .opening-brand{
+    bottom:5vh;
+    gap:0.75rem;
+  }
+  .opening-brand img{
+    width:clamp(42px,9vw,64px);
+  }
+  .opening-brand .brand-text{
+    font-size:clamp(0.95rem,3vw,1.2rem);
+    letter-spacing:0.18em;
+    padding-left:0.18em;
+  }
+}
+.opening-subtitle{
+  font-family:var(--f-serif);
+  font-size:clamp(1.6rem,3.2vw,2.6rem);
+  color:var(--gold-l);
+  letter-spacing:0.35em;
+  padding-left:0.35em;
+  font-weight:500;
+  margin-bottom:2vh;
+}
+.opening-chapter{
+  font-family:var(--f-serif);
+  font-size:clamp(1rem,1.5vw,1.2rem);
+  color:var(--cream);
+  letter-spacing:0.25em;
+  padding-left:0.25em;
+  opacity:0.85;
+  margin-bottom:1vh;
+}
+.opening-tagline{
+  font-family:var(--f-serif);
+  font-style:italic;
+  color:var(--gold);
+  font-size:clamp(0.95rem,1.4vw,1.15rem);
+  letter-spacing:0.1em;
+  margin-top:5vh;
+}
+.opening-by{
+  font-family:var(--f-num);
+  color:var(--gold-d);
+  font-size:clamp(0.8rem,1.1vw,1rem);
+  margin-top:1vh;
+  letter-spacing:0.25em;
+}
+.cover-brand{
+  display:flex;
+  align-items:center;
+  gap:clamp(1rem,2vw,2rem);
+  margin-bottom:4vh;
+}
+.cover-line{
+  width:clamp(40px,8vw,90px);
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.cover-brand-text{
+  font-family:var(--f-serif);
+  color:var(--gold);
+  font-size:clamp(0.9rem,1.4vw,1.1rem);
+  letter-spacing:0.4em;
+  padding-left:0.4em;
+}
+.cover-title{
+  font-size:clamp(3rem,8vw,7rem);
+  font-weight:900;
+  color:var(--paper);
+  text-align:center;
+  letter-spacing:0.15em;
+  line-height:1.1;
+  margin-bottom:3vh;
+}
+.cover-title .gold{color:var(--gold-3)}
+.cover-chapter{
+  font-family:var(--f-num);
+  font-size:clamp(1.5rem,3vw,2.5rem);
+  color:var(--gold);
+  letter-spacing:0.3em;
+  margin-bottom:3vh;
+}
+.cover-motto{
+  font-style:italic;
+  color:var(--cream);
+  font-size:clamp(1.3rem,2.2vw,1.8rem);
+  text-align:center;
+  margin-top:5vh;
+  letter-spacing:0.08em;
+}
+.cover-by{
+  font-family:var(--f-num);
+  color:var(--gold-d);
+  font-size:clamp(0.9rem,1.3vw,1.1rem);
+  margin-top:2vh;
+  letter-spacing:0.2em;
+}
+
+/* 控件 */
+.controls{
+  position:fixed;
+  bottom:24px;
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:space-between;
+  padding:0 32px;
+  pointer-events:none;
+  z-index:100;
+  font-family:var(--f-sans);
+}
+.hint{
+  font-size:0.78rem;
+  color:var(--muted);
+  letter-spacing:0.1em;
+}
+.progress{
+  font-family:var(--f-num);
+  font-size:0.95rem;
+  color:var(--gold-d);
+  font-weight:600;
+  letter-spacing:0.15em;
+}
+
+/* 进度条 */
+.progress-bar{
+  position:fixed;
+  top:0;
+  left:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--gold-d),var(--gold),var(--gold-3));
+  z-index:101;
+  transition:width 0.5s ease;
+  width:0;
+}
+
+/* 转场动画 */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.slide.active .eyebrow,
+.slide.active .label,
+.slide.active h1,
+.slide.active h2,
+.slide.active .bignum,
+.slide.active .caption,
+.slide.active .quote-big,
+.slide.active .quote-mid,
+.slide.active .timeline,
+.slide.active .vs,
+.slide.active .list-big li,
+.slide.active .list-arrow > *,
+.slide.active .three-col,
+.slide.active .cny-grid,
+.slide.active .roadmap{
+  animation:fadeUp 0.7s cubic-bezier(.22,.61,.36,1) backwards;
+}
+.slide.active .eyebrow{animation-delay:0.05s}
+.slide.active h1.title{animation-delay:0.15s}
+.slide.active h2.subtitle{animation-delay:0.3s}
+.slide.active .bignum{animation-delay:0.25s}
+.slide.active .label{animation-delay:0.15s}
+.slide.active .caption{animation-delay:0.4s}
+.slide.active .quote-big{animation-delay:0.2s}
+.slide.active .quote-mid{animation-delay:0.2s}
+.slide.active .list-big li:nth-child(1){animation-delay:0.25s}
+.slide.active .list-big li:nth-child(2){animation-delay:0.4s}
+.slide.active .list-big li:nth-child(3){animation-delay:0.55s}
+.slide.active .list-big li:nth-child(4){animation-delay:0.7s}
+.slide.active .list-big li:nth-child(5){animation-delay:0.85s}
+
+.section-divider{
+  width:60px;
+  height:2px;
+  background:var(--gold);
+  margin:3vh auto;
+}
+
+/* 角标 */
+.corner-tag{
+  position:absolute;
+  top:32px;
+  right:32px;
+  font-family:var(--f-num);
+  font-size:0.85rem;
+  color:var(--gold-d);
+  letter-spacing:0.2em;
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="deck">
+
+<!-- ============ COVER ============ -->
+<!-- 中央: 章节标题 + 主题; 右下角落: logo + 副标题(由 logo 自带文字) -->
+<section class="slide active slide-cover slide-opening" data-section="cover">
+  <div class="cover-chapter" style="font-size:clamp(1.3rem,2.2vw,1.8rem);color:var(--gold);letter-spacing:0.5em;padding-left:0.5em">第 〇 章 · 开课导言</div>
+  <h1 class="cover-title" style="font-size:clamp(2.4rem,5vw,4.2rem);font-weight:500;color:var(--paper);margin-top:4vh;letter-spacing:0.15em;padding-left:0.15em;line-height:1.4">为 什 么 学 AI<br><span style="color:var(--gold-l)">怎 么 学 这 门 课</span></h1>
+</section>
+
+<!-- ============ 0.1 ============ -->
+
+<section class="slide" data-section="0.1">
+  <div class="eyebrow"><span class="num">0.1</span>第一节</div>
+  <h1 class="title">为什么我们要学 <span style="color:var(--gold-3)">AI</span>?</h1>
+  <div class="section-divider"></div>
+  <h2 class="subtitle">虽有智慧, 不如乘势</h2>
+</section>
+
+<!-- 开场 · 课程定位 -->
+<section class="slide">
+  <div class="eyebrow">这门课的定位</div>
+  <h1 class="title" style="font-size:clamp(2rem,4.5vw,3.5rem)">《<span style="color:var(--gold-3)">乘势 AI 商业实战课</span>》</h1>
+  <div class="quote-mid" style="margin-top:5vh;color:var(--muted)">
+    不只教技术 · 不只讲原理
+  </div>
+  <div class="quote-big" style="margin-top:3vh;font-size:clamp(1.6rem,3.2vw,2.8rem)">
+    更重要的 ——<br>
+    教你用 <span class="em">AI 做商业</span><br>
+    <span class="em">挣到更多钱</span>
+  </div>
+</section>
+
+<!-- 开场 · 想成功 -->
+<section class="slide">
+  <div class="quote-big">
+    想成功?<br>
+    想<span class="em">赚到钱</span>?
+  </div>
+  <div class="quote-mid" style="margin-top:5vh">
+    第一个<span class="em">必备要素</span> ——<br>
+    <br>
+    执行力 · <span class="em">勤奋</span>
+  </div>
+  <div class="caption" style="margin-top:3vh;color:var(--muted)">这是必要条件 · 是基础</div>
+</section>
+
+<!-- 开场 · 但 -->
+<section class="slide">
+  <div class="quote-big">
+    但 ——<br>
+    <br>
+    市面上<br>
+    <span class="em">从来不缺勤奋的人</span>
+  </div>
+  <div class="quote-mid" style="margin-top:5vh">
+    可结果, <span class="red">天差地别</span>
+  </div>
+</section>
+
+<!-- 开场 · 公式 -->
+<section class="slide">
+  <div class="eyebrow">核心差别</div>
+  <div class="bignum" style="font-size:clamp(2.4rem,7vw,6rem);line-height:1.2">
+    勤奋 <span style="color:var(--paper)">×</span> 行业 <span style="color:var(--paper)">=</span> <span style="color:var(--red)">结果</span>
+  </div>
+  <div class="quote-mid" style="margin-top:5vh">
+    差别 · 在<span class="em">行业的选择</span>上
+  </div>
+</section>
+
+<!-- 开场 · 高速增长 -->
+<section class="slide">
+  <div class="quote-big">
+    选一个<br>
+    <span class="em">高速增长</span>的行业
+  </div>
+  <div class="list-arrow" style="margin-top:5vh">
+    <div>时代推着你往前走</div>
+    <div class="arrow">↓</div>
+    <div style="color:var(--gold-3);font-weight:700">水涨船高 · 把你带到一个高度</div>
+  </div>
+</section>
+
+<!-- 开场 · 临近爆发 -->
+<section class="slide">
+  <div class="quote-big">
+    并且 ——<br>
+    <br>
+    必须是<br>
+    <span class="em">临近爆发</span>的行业
+  </div>
+  <div class="caption" style="margin-top:5vh;color:var(--muted)">来得太早 · 等不到爆发 · 行业先没了</div>
+  <div class="quote-mid" style="margin-top:3vh">
+    最好的时机: 爆发<span class="em">前夕</span>
+  </div>
+</section>
+
+<!-- 开场 · AI 为什么 -->
+<section class="slide">
+  <div class="quote-big">
+    AI<br>
+    <br>
+    <span class="em">为什么</span>是一个<br>
+    <span class="em">临近爆发</span>的行业?
+  </div>
+</section>
+
+<!-- 开场 · 两个理由 -->
+<section class="slide">
+  <div class="eyebrow">两个理由</div>
+  <ul class="list-big">
+    <li><span class="num">①</span>现在的<span class="em">技术</span> · 已经到了爆发的<span class="em">临界点</span></li>
+    <li><span class="num">②</span>各家<span class="em">大厂</span> · 都在用力<span class="em">投入</span></li>
+  </ul>
+  <div class="caption" style="margin-top:5vh;color:var(--muted)">第二点 · 我们看钱说话</div>
+</section>
+
+<!-- 钱不会说谎 -->
+<section class="slide">
+  <div class="quote-big">
+    <span class="em">钱</span><br>
+    都流向哪儿了?
+  </div>
+  <div class="caption" style="margin-top:5vh">钱 · 不会说谎</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">段二 · 第一个证据</div>
+  <div class="label">字节跳动 · 2026</div>
+  <div class="bignum">2000 亿</div>
+  <div class="caption">AI 资本开支 · 比年初计划 <span style="color:var(--gold-3);font-weight:700">+25%</span></div>
+  <div class="caption-sm">不是营收, 是「花出去的钱」 · 一年砸 AI 基础设施</div>
+  <div class="caption-sm" style="margin-top:1vh">本月初 · 南华早报报道</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">段二 · 第二个证据</div>
+  <div class="label">Anthropic</div>
+  <h1 class="title" style="font-size:clamp(2rem,4.5vw,3.5rem)">一家成立<span style="color:var(--gold-3)">不到 5 年</span>的 AI 公司</h1>
+  <div class="caption" style="margin-top:3vh">产品叫 Claude</div>
+</section>
+
+<section class="slide">
+  <div class="label">Anthropic 最新估值</div>
+  <div class="bignum">1.2 万亿</div>
+  <div class="caption" style="font-size:clamp(1.3rem,2.2vw,1.8rem);color:var(--gold-3);font-weight:600">美元</div>
+  <div class="caption-sm" style="margin-top:2vh">≈ 8.7 万亿人民币</div>
+  <div class="caption-sm" style="margin-top:3vh;color:var(--cream)">如果今天上市 → 全球第 <span style="color:var(--gold-3);font-weight:700">11</span> 大上市公司</div>
+  <div class="caption-sm" style="color:var(--muted)">仅次于苹果、微软、英伟达……</div>
+</section>
+
+<section class="slide">
+  <div class="label">更疯狂的是涨的速度</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">2025 年 10 月</div>
+      <div class="tl-val">1200 亿</div>
+    </div>
+    <div class="tl-arrow">→</div>
+    <div class="tl-item">
+      <div class="tl-date">2026 年 5 月</div>
+      <div class="tl-val" style="color:var(--gold-3)">1.2 万亿</div>
+    </div>
+  </div>
+  <div class="quote-mid" style="margin-top:3vh">
+    半年时间, 涨了 <span class="em">9 倍</span>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="label">光是 2026 年 4 月 → 5 月</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">4 月</div>
+      <div class="tl-val">9000 亿</div>
+    </div>
+    <div class="tl-arrow">→</div>
+    <div class="tl-item">
+      <div class="tl-date">5 月初</div>
+      <div class="tl-val" style="color:var(--red)">1.2 万亿</div>
+    </div>
+  </div>
+  <div class="quote-mid" style="margin-top:3vh">
+    <span class="red">7 天</span>内, 涨了 <span class="red">20%</span>
+  </div>
+  <div class="caption" style="margin-top:2vh">这, 就在过去几周里发生</div>
+</section>
+
+<section class="slide">
+  <div class="label">2026 年 5 月初</div>
+  <div class="vs">
+    <div class="vs-side">
+      <div class="vs-name">Anthropic</div>
+      <div class="vs-num win">1.2 万亿</div>
+    </div>
+    <div class="vs-mid">VS</div>
+    <div class="vs-side">
+      <div class="vs-name">OpenAI</div>
+      <div class="vs-num lose">8520 亿</div>
+    </div>
+  </div>
+  <div class="quote-mid" style="margin-top:4vh">
+    Anthropic <span class="em">反超</span> OpenAI · <span class="red">+20%</span>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">段二 · 第三个证据</div>
+  <div class="label">OpenAI · 做 ChatGPT 的公司</div>
+  <div class="bignum">8520 亿</div>
+  <div class="caption">美元估值 · 基于 2026 年 3 月 <span style="color:var(--gold-3);font-weight:600">1220 亿</span>美元融资</div>
+  <div class="quote-mid" style="margin-top:5vh">
+    几个月前还是 AI 老大<br>
+    <span class="red">几个月就被反超了</span>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="quote-big">
+    你在看这节课的<br>
+    几十分钟里<br>
+    <br>
+    这两家公司的<span class="em">排名</span><br>
+    可能<span class="em">又变了</span>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="quote-big">
+    这些公司的老板<br>
+    <span style="color:var(--cream);font-size:0.7em">智商不比你低<br>信息不比你少</span><br>
+    <br>
+    他们<span class="em">看到了什么</span>?
+  </div>
+</section>
+
+<section class="slide">
+  <div class="quote-big">
+    未来 10 — 20 年<br>
+    <br>
+    <span class="em">所有产业</span><br>
+    都会被 AI<br>
+    <span class="em">重做一遍</span>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="list-arrow">
+    <div><span style="color:var(--gold);font-family:var(--f-num);font-weight:600">1995</span> · 互联网重做传统行业</div>
+    <div class="arrow">↓</div>
+    <div><span style="color:var(--gold);font-family:var(--f-num);font-weight:600">2008</span> · 移动互联网重做 PC 互联网</div>
+    <div class="arrow">↓</div>
+    <div style="color:var(--gold-3);font-weight:700"><span style="font-family:var(--f-num)">2026</span> · AI 重做所有</div>
+  </div>
+  <div class="quote-mid" style="margin-top:6vh">
+    每一次「重做」<br>
+    都是巨头之间的<span class="em">战争</span><br>
+    也是普通人之间的<span class="red">洗牌</span>
+  </div>
+</section>
+
+<!-- 段三 -->
+<section class="slide" data-section="0.1-3">
+  <div class="eyebrow">段三</div>
+  <h1 class="title">这<span style="color:var(--muted)">不只是巨头的游戏</span></h1>
+  <div class="section-divider"></div>
+  <h2 class="subtitle" style="color:var(--gold-3);font-weight:700">AI 已经在你身边</h2>
+</section>
+
+<section class="slide">
+  <div class="label">案例 1 · 你刷抖音</div>
+  <div class="list-arrow" style="margin:6vh 0">
+    <div style="color:var(--muted)">铺天盖地的真人短剧</div>
+    <div class="arrow" style="font-size:1.4em">↓</div>
+    <div style="color:var(--gold-3);font-weight:700;font-size:1.4em">AI 漫剧</div>
+  </div>
+  <div class="quote-mid" style="margin-top:3vh">
+    正在<span class="em">快速替代</span>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="label">案例 2 · 你做电商</div>
+  <div class="vs" style="margin-top:5vh">
+    <div class="vs-side">
+      <div class="vs-name">设计师做详情页</div>
+      <div class="vs-num" style="color:var(--muted);font-size:clamp(2rem,5vw,4rem)">500-1000 元</div>
+      <div class="caption-sm" style="margin-top:1vh">1-2 天</div>
+    </div>
+    <div class="vs-mid">→</div>
+    <div class="vs-side">
+      <div class="vs-name">AI 作图</div>
+      <div class="vs-num win" style="font-size:clamp(2rem,5vw,4rem)">&lt; 1 毛</div>
+      <div class="caption-sm" style="margin-top:1vh">几分钟</div>
+    </div>
+  </div>
+  <div class="quote-mid" style="margin-top:5vh;font-size:clamp(1.2rem,2.4vw,2rem)">
+    对手用 AI 一天出 100 张主图<br>
+    你还在等设计师两天交一张
+  </div>
+</section>
+
+<section class="slide">
+  <div class="label">案例 3 · 你朋友</div>
+  <div class="quote-big" style="margin:3vh 0">
+    我有个朋友<br>
+    在<span class="em">大厂</span>工作
+  </div>
+  <div class="quote-mid" style="margin-top:4vh;color:var(--cream)">
+    他告诉我 ——<br>
+    <br>
+    AI 使用量 <span class="red">=</span> 绩效 <span class="red">KPI</span>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="quote-big">
+    会用 AI<br>
+    是<span class="em">基础门槛</span>
+  </div>
+  <div class="quote-mid" style="margin-top:5vh;color:var(--muted)">
+    不会用 ——<br>
+    别想升职、加薪<br>
+    甚至别想留下来
+  </div>
+</section>
+
+<section class="slide">
+  <div class="list-big">
+    <li>短剧被 <span class="em">AI 漫剧</span> 替代</li>
+    <li>详情页被 <span class="em">AI 作图</span> 替代</li>
+    <li>大厂员工被 <span class="em">AI 考核</span></li>
+  </div>
+  <div class="quote-mid" style="margin-top:6vh">
+    <span class="red">三件事</span> · 正在<span class="red">同时发生</span>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="quote-big">
+    大厂员工的<span class="em">今天</span><br>
+    <br>
+    就是<br>
+    <br>
+    3 年后所有职场人的<span class="red">明天</span>
+  </div>
+</section>
+
+<!-- 段四 -->
+<section class="slide" data-section="0.1-4">
+  <div class="eyebrow">段四</div>
+  <h1 class="title">那<span style="color:var(--gold-3)">普通人</span>怎么办?</h1>
+  <div class="section-divider"></div>
+  <h2 class="subtitle"><span class="num" style="font-family:var(--f-num);color:var(--gold)">3</span> 条路</h2>
+</section>
+
+<section class="slide">
+  <div class="three-col">
+    <div class="col-card primary">
+      <div class="col-medal">①</div>
+      <div class="col-title">用 AI<br>做智能体</div>
+      <div class="col-desc" style="color:var(--gold-3);font-weight:700;margin-top:1em">★ 我最推荐</div>
+    </div>
+    <div class="col-card">
+      <div class="col-medal">②</div>
+      <div class="col-title">AI 智能体<br>改造企业</div>
+      <div class="col-desc" style="margin-top:1em">5000 — 5 万 / 单</div>
+    </div>
+    <div class="col-card">
+      <div class="col-medal">③</div>
+      <div class="col-title">用 AI 找<br>更好的工作</div>
+      <div class="col-desc" style="margin-top:1em">升职 · 加薪</div>
+    </div>
+  </div>
+  <div class="quote-mid" style="margin-top:4vh">
+    选 <span class="em">1 条</span> · 扎进去
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">① 第一条路</div>
+  <div class="label" style="font-size:clamp(1.4rem,2.6vw,2.2rem);color:var(--paper);font-weight:700">用 AI · 做智能体</div>
+  <ul class="list-big" style="margin-top:4vh">
+    <li><span class="num">①</span>把你擅长的事 · <span class="em">封装成智能体</span></li>
+    <li><span class="num">②</span>自用 / 卖给同行 / 接企业改造 · <span class="em">都行</span></li>
+    <li><span class="num">③</span>不依赖团队 · <span class="em">一人即可启动</span></li>
+  </ul>
+  <div class="caption" style="margin-top:4vh;color:var(--muted)">第四阶段会讲: Skill / MCP / SubAgent</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">② 第二条路</div>
+  <h1 class="title" style="font-size:clamp(2rem,4.5vw,3.5rem)">学会做 AI 智能体<br>给企业做改造</h1>
+  <div class="caption" style="margin-top:4vh">
+    全国几千万中小企业<br>
+    <span style="color:var(--gold-3);font-weight:600">90%</span> 还没用上 AI
+  </div>
+  <div class="quote-mid" style="margin-top:5vh">
+    <span class="em">5000</span> 块 — <span class="em">5 万</span> 块 / 单
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">③ 第三条路</div>
+  <h1 class="title" style="font-size:clamp(2rem,4.5vw,3.5rem)">用 AI<br>找<span style="color:var(--gold-3)">更好的工作</span></h1>
+  <div class="quote-mid" style="margin-top:4vh">
+    或 · 在现在的公司<br>
+    <span class="em">升职 · 加薪</span>
+  </div>
+  <div class="caption" style="margin-top:5vh;color:var(--muted)">会用 AI 的人 · 在 2026 的职场被快速识别<br>代价: 比同事更早开始用 AI</div>
+</section>
+
+<!-- 段五 -->
+<section class="slide" data-section="0.1-5">
+  <div class="eyebrow">段五</div>
+  <h1 class="title">那<span style="color:var(--gold-3)">老板</span>呢?</h1>
+  <div class="section-divider"></div>
+  <h2 class="subtitle"><span style="font-family:var(--f-num);color:var(--gold)">3</span> 个方向 · 增加利润</h2>
+</section>
+
+<section class="slide">
+  <div class="three-col">
+    <div class="col-card primary">
+      <div class="col-medal" style="font-family:var(--f-num);font-size:clamp(3rem,5vw,4.5rem);color:var(--gold-3)">①</div>
+      <div class="col-title">你的方案<br>卖给同行</div>
+      <div class="col-desc" style="color:var(--red);font-weight:700;margin-top:1em">★ 先用熟</div>
+    </div>
+    <div class="col-card primary">
+      <div class="col-medal" style="font-family:var(--f-num);font-size:clamp(3rem,5vw,4.5rem);color:var(--gold-3)">②</div>
+      <div class="col-title">传统产品 + AI<br>= 化学反应</div>
+      <div class="col-desc" style="color:var(--red);font-weight:700;margin-top:1em">★ 更深一层</div>
+    </div>
+    <div class="col-card">
+      <div class="col-medal" style="font-family:var(--f-num);font-size:clamp(3rem,5vw,4.5rem);color:var(--gold)">③</div>
+      <div class="col-title">AI 提效<br>替代人工</div>
+      <div class="col-desc" style="margin-top:1em">降成本</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">① 第一个方案 · 卖给同行</div>
+  <div class="list-arrow" style="margin-top:3vh">
+    <div style="color:var(--muted)">你公司用 AI · 用熟了</div>
+    <div class="arrow" style="font-size:1.4em">↓</div>
+    <div style="color:var(--gold-3);font-weight:700;font-size:1.3em">把<span style="color:var(--red)">解决方案</span>打包 · 卖给<span style="color:var(--red)">同行</span></div>
+  </div>
+  <div class="quote-mid" style="margin-top:5vh">
+    你<span class="em">先做</span>了<br>
+    赚的就是<span class="em">同行的钱</span>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">② 第二个层次 · 化学反应</div>
+  <div class="quote-big" style="font-size:clamp(1.8rem,3.5vw,3rem)">
+    你的<span style="color:var(--cream)">传统产品</span><br>
+    <br>
+    <span class="em">+ AI</span><br>
+    <br>
+    发生 <span class="em">化学反应</span>
+  </div>
+  <div class="caption" style="margin-top:5vh;color:var(--cream)">举一个例子 ——</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">案例 · 健身房 + 体重管理 Agent</div>
+  <div class="list-arrow" style="margin-top:3vh;font-size:clamp(1rem,1.7vw,1.4rem);line-height:1.9">
+    <div style="color:var(--muted)">原来 · 只是一个健身房</div>
+    <div class="arrow" style="font-size:1.2em">↓ 加上 Agent ↓</div>
+    <div style="color:var(--cream)">用户每天吃什么 · 拍一拍</div>
+    <div style="color:var(--cream)">训练计划 · Agent 全管</div>
+    <div style="color:var(--cream)">建议吃什么 · 练什么 · 配合私教</div>
+    <div class="arrow" style="font-size:1.2em">↓</div>
+    <div style="color:var(--gold-3);font-weight:700;font-size:1.2em">用户离不开你 · 体验更好 · 利润更高</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">③ AI 提效 · 替代人工</div>
+  <div class="list-big" style="font-size:clamp(1.1rem,2vw,1.6rem);line-height:2;margin-top:3vh">
+    <li>朋友圈运营 · 客服</li>
+    <li>内容剪辑 · 初级文案</li>
+    <li>设计师 · 培训助理 ……</li>
+  </div>
+  <div class="quote-mid" style="margin-top:5vh">
+    能<span class="em">替代</span>的就替代<br>
+    不替代的 · 让人 <span class="em">×2 倍效率</span>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">这门课对老板的承诺</div>
+  <div class="quote-big">
+    学完之后<br>
+    <br>
+    你能识别出<br>
+    至少 <span class="em">3 个</span><br>
+    AI 可以介入的<br>
+    机会点
+  </div>
+</section>
+
+<!-- 段六 · 收尾 -->
+<section class="slide">
+  <div class="eyebrow">收尾</div>
+  <ul class="list-big">
+    <li>AI · 是<span class="em">临近爆发</span>的行业</li>
+    <li>钱 · 都在 AI 上</li>
+    <li>AI · 已经在你身边</li>
+    <li>普通人 · <span class="em">3 条路</span></li>
+    <li>老板 · <span class="em">3 个方向</span></li>
+  </ul>
+  <div class="quote-mid" style="margin-top:5vh">
+    「<span class="em">为什么学 AI</span>」<br>
+    讲完了
+  </div>
+</section>
+
+<section class="slide">
+  <div class="quote-big">
+    第一节<span class="em">到这里</span><br>
+    <br>
+    下一节<br>
+    我们<span class="em">直接动手</span>
+  </div>
+</section>
+
+<section class="slide slide-cover">
+  <div class="cover-brand">
+    <div class="cover-line"></div>
+    <div class="cover-brand-text">乘势 AI 商业实战课</div>
+    <div class="cover-line"></div>
+  </div>
+  <h1 class="cover-title" style="font-size:clamp(3rem,7vw,6rem)">
+    准备好你的<span class="gold">电脑</span><br>
+    我们<span class="gold">开始</span>
+  </h1>
+  <div class="cover-motto" style="margin-top:5vh">虽有智慧, 不如乘势</div>
+</section>
+
+</div>
+
+<!-- 全局品牌区:每个 slide 都显示 -->
+<div class="opening-brand">
+  <img src="../images/logo.png" alt="乘势 logo">
+  <span class="brand-text">乘势 AI 商业实战课</span>
+</div>
+
+<div class="controls">
+  <div class="hint">← → 翻页 · 空格下一页 · F 全屏 · Home 首页</div>
+  <div class="progress" id="progress">1 / 1</div>
+</div>
+
+<script>
+let current = 0;
+const slides = Array.from(document.querySelectorAll('.slide'));
+const total = slides.length;
+const progress = document.getElementById('progress');
+const progressBar = document.getElementById('progressBar');
+
+function show(n){
+  if(n < 0 || n >= total) return;
+  slides[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  progress.textContent = `${current + 1} / ${total}`;
+  progressBar.style.width = `${((current + 1) / total) * 100}%`;
+  // 滚动到当前 slide 顶部(防止内部溢出)
+  slides[current].scrollTop = 0;
+}
+
+function next(){show(Math.min(current + 1, total - 1))}
+function prev(){show(Math.max(current - 1, 0))}
+
+document.addEventListener('keydown', e => {
+  switch(e.key){
+    case 'ArrowRight':
+    case ' ':
+    case 'PageDown':
+    case 'Enter':
+      e.preventDefault();
+      next();
+      break;
+    case 'ArrowLeft':
+    case 'PageUp':
+    case 'Backspace':
+      e.preventDefault();
+      prev();
+      break;
+    case 'Home':
+      e.preventDefault();
+      show(0);
+      break;
+    case 'End':
+      e.preventDefault();
+      show(total - 1);
+      break;
+    case 'f':
+    case 'F':
+      e.preventDefault();
+      if(!document.fullscreenElement){
+        document.documentElement.requestFullscreen?.();
+      }else{
+        document.exitFullscreen?.();
+      }
+      break;
+    case 'Escape':
+      // 浏览器会自己处理 Esc 退出全屏
+      break;
+  }
+});
+
+// 点击翻页:左 1/3 上一页,右 2/3 下一页
+document.addEventListener('click', e => {
+  if(e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
+  const w = window.innerWidth;
+  if(e.clientX < w / 4) prev();
+  else next();
+});
+
+// 触摸滑动
+let touchX = 0;
+document.addEventListener('touchstart', e => {
+  touchX = e.touches[0].clientX;
+}, {passive:true});
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchX;
+  if(dx > 60) prev();
+  else if(dx < -60) next();
+}, {passive:true});
+
+// 初始化
+show(0);
+</script>
+
+</body>
+</html>

@@ -396,9 +396,9 @@ body{
 .aud.fit h4{color:var(--gold-2)}
 .aud.unfit h4{color:var(--muted)}
 .aud ul{list-style:none}
-.aud li{font-family:var(--f-sans);font-size:var(--t-tiny);line-height:1.85;padding:6px 0;color:var(--cream);font-weight:300}
-.aud.fit li::before{content:"◆ ";color:var(--gold);font-size:10px;vertical-align:middle}
-.aud.unfit li::before{content:"◇ ";color:var(--muted);font-size:10px;vertical-align:middle}
+.aud li{font-family:var(--f-sans);font-size:var(--t-body-sm);line-height:1.9;padding:7px 0;color:var(--cream);font-weight:300}
+.aud.fit li::before{content:"◆ ";color:var(--gold);font-size:0.85em;vertical-align:middle;margin-right:2px}
+.aud.unfit li::before{content:"◇ ";color:var(--muted);font-size:0.85em;vertical-align:middle;margin-right:2px}
 
 /* ============ GUARANTEE ============ */
 .grtee{display:flex;flex-direction:column;gap:14px;padding:clamp(26px,5.5vw,36px);background:rgba(0,0,0,0.4);border:1px solid var(--line)}
@@ -424,7 +424,15 @@ body{
 .cta::after{animation:slow-rotate-rev 60s linear infinite}
 @keyframes slow-rotate-rev{from{transform:rotate(180deg)}to{transform:rotate(540deg)}}
 
-.cta-top{font-family:var(--f-num);font-size:var(--t-mini);letter-spacing:clamp(8px,2.4vw,12px);color:var(--gold);margin-bottom:28px;text-transform:uppercase;font-weight:500}
+.cta-top{font-family:var(--f-num);font-size:var(--t-mini);letter-spacing:clamp(8px,2.4vw,12px);color:var(--gold);margin-bottom:18px;text-transform:uppercase;font-weight:500}
+.cta-badge{
+  display:inline-block;font-family:var(--f-serif);font-size:var(--t-body-sm);
+  letter-spacing:clamp(4px,1.6vw,8px);color:var(--red-2);
+  padding:8px 24px;border:1px solid var(--red);
+  background:rgba(168,48,44,0.12);margin-bottom:24px;font-weight:500;
+  position:relative;animation:badge-pulse 2.4s ease-in-out infinite;
+}
+@keyframes badge-pulse{0%,100%{box-shadow:0 0 0 0 rgba(216,74,58,0.4)}50%{box-shadow:0 0 0 8px rgba(216,74,58,0)}}
 .cta-price{
   font-family:var(--f-num);font-size:var(--t-price-cta);line-height:1;font-weight:700;
   background:linear-gradient(135deg,#f3d678,#c8a35c,#f3d678);
@@ -851,14 +859,15 @@ body{
   <!-- ============ CTA ============ -->
   <section class="cta">
     <div class="cta-top reveal">CHENG · SHI · NOW</div>
-    <div class="cta-price reveal" data-d="1" id="cta-price"><span id="cta-num">899</span><span class="yuan">元</span></div>
-    <div class="cta-line reveal" data-d="2"></div>
+    <div class="cta-badge reveal" data-d="1">★ 新 课 首 发 · 限 时 特 惠 ★</div>
+    <div class="cta-price reveal" data-d="2" id="cta-price"><span id="cta-num">5000</span><span class="yuan">元</span></div>
+    <div class="cta-line reveal" data-d="3"></div>
     <div class="cta-quote reveal" data-d="3">
       虽 有 智 慧 · 不 如 乘 势<br/>
       普 通 人 这 十 年 最 大 的 势 · 是 A I
     </div>
     <div class="cta-final reveal" data-d="4">你 乘 到 了 吗</div>
-    <a class="cta-btn reveal" data-d="5" href="#" id="cta-btn">立 即 加 入</a>
+    <a class="cta-btn reveal" data-d="5" href="https://56h5e.xetslk.com/s/ch3w3" target="_blank" rel="noopener" id="cta-btn">立 即 加 入</a>
   </section>
 
   <div class="footer">乘 势 · AI 商业实战课 · 数字生命 KING · MMXXVI</div>
@@ -867,7 +876,7 @@ body{
 <!-- 浮动底部 CTA(手机端) -->
 <div class="floating-cta" id="floatCta">
   <div class="price">¥899<small>原价 5000+</small></div>
-  <a class="btn" href="#cta-btn">立 即 加 入</a>
+  <a class="btn" href="https://56h5e.xetslk.com/s/ch3w3" target="_blank" rel="noopener">立 即 加 入</a>
 </div>
 
 <script>
@@ -908,24 +917,24 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-// 价格数字累加 + 弹动
+// 价格数字: 从 5000 降到 899 + 弹动
 const priceEl = document.getElementById('cta-price');
 const priceNum = document.getElementById('cta-num');
-function animateNum(el, target, dur) {
+function animateNum(el, from, to, dur) {
   const start = performance.now();
   function tick(t) {
     const p = Math.min((t - start) / dur, 1);
     const eased = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.floor(eased * target);
+    el.textContent = Math.floor(from + (to - from) * eased);
     if (p < 1) requestAnimationFrame(tick);
-    else el.textContent = target;
+    else el.textContent = to;
   }
   requestAnimationFrame(tick);
 }
 const priceObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      animateNum(priceNum, 899, 1600);
+      animateNum(priceNum, 5000, 899, 1800);
       e.target.style.animation = 'none';
       void e.target.offsetWidth;
       e.target.style.animation = 'price-glow 4s ease-in-out infinite, bounce 0.8s cubic-bezier(.42,1.4,.36,1)';

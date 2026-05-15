@@ -273,6 +273,30 @@ body{
 .lesson .num{font-family:var(--f-num);color:var(--gold);font-size:var(--t-body-sm);min-width:38px;font-weight:600;letter-spacing:0.5px;flex-shrink:0;padding-top:3px;transition:color 0.3s ease}
 .lesson .txt{font-family:var(--f-sans);font-size:var(--t-body);line-height:1.7;color:var(--cream);font-weight:400;transition:color 0.3s ease;position:relative;z-index:1}
 
+/* 免费试看按钮 — 放在第〇章 stage 卡片末尾 */
+.preview-btn{
+  display:flex;align-items:center;justify-content:center;gap:clamp(8px,2vw,14px);
+  margin-top:18px;padding:clamp(13px,3vw,16px) clamp(16px,4vw,22px);
+  border:1px solid var(--gold);background:linear-gradient(180deg,rgba(200,163,92,0.08),rgba(200,163,92,0.02));
+  color:var(--gold-2);text-decoration:none;
+  font-family:var(--f-serif);font-size:var(--t-body-sm);font-weight:500;letter-spacing:0.25em;
+  position:relative;overflow:hidden;
+  transition:all 0.35s ease;
+}
+.preview-btn::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(200,163,92,0.14),transparent 70%);
+  opacity:0;transition:opacity 0.35s ease;
+}
+.preview-btn:hover{
+  background:linear-gradient(180deg,rgba(200,163,92,0.16),rgba(200,163,92,0.05));
+  color:var(--gold-3);border-color:var(--gold-3);letter-spacing:0.3em;
+}
+.preview-btn:hover::before{opacity:1}
+.preview-btn .star{color:var(--gold-3);font-size:1.1em;position:relative;z-index:1}
+.preview-btn .arrow{font-family:var(--f-num);font-weight:600;position:relative;z-index:1}
+.preview-btn .txt{position:relative;z-index:1}
+
 /* ============ 核武器 ============ */
 .weapon-label{
   display:inline-block;font-family:var(--f-num);font-size:var(--t-mini);letter-spacing:clamp(6px,2vw,10px);
@@ -573,6 +597,11 @@ body{
         <div class="lesson"><span class="num">0.2</span><span class="txt">2026 年小白学 AI 的正确路径图</span></div>
         <div class="lesson gold"><span class="num">0.3</span><span class="txt">入门体验:Claude Code 安装和应用</span></div>
       </div>
+      <a class="preview-btn" href="https://kingkk469.github.io/lecture-html/examples/course-01-opening.html" target="_blank" rel="noopener">
+        <span class="star">★</span>
+        <span class="txt">免 费 试 看 · 第 〇 章 完 整 版</span>
+        <span class="arrow">→</span>
+      </a>
     </div>
 
     <div class="stage reveal">

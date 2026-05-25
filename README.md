@@ -43,6 +43,32 @@ Claude 会自动识别并使用这套设计公式。
 4. 编辑 `template.html`,改字改内容
 5. 浏览器打开 → 按 `F` 全屏 → 开讲
 
+## 把成品分享给别人
+
+HTML 用相对路径引用 `images/` 里的图。**只发 .html 单文件,对方那边没有图片文件夹,所有背景和 logo 都会 404。** 三种解法:
+
+### A. 打成 zip 一起发(最快)
+
+```bash
+python scripts/pack.py my-lecture.html
+# → my-lecture.zip(里面有 HTML + 它真正用到的图)
+```
+
+对方解压后双击 HTML 即可。
+
+### B. 部署到 GitHub Pages,发链接
+
+把 HTML + `images/` 一起 push 到 GitHub repo,Settings → Pages 选 `main` 分支,几分钟后就能用 `https://<你>.github.io/<repo>/` 访问。优点:更新只要 `git push`,链接永远是最新的。
+
+### C. 把图片内嵌成单文件(发微信最方便)
+
+```bash
+python scripts/inline.py my-lecture.html
+# → my-lecture.inline.html(完全自包含,不需要 images/ 文件夹)
+```
+
+把图片全部转成 base64 内嵌进 HTML,产出一个**单文件**。微信/邮件发这一个文件,对方双击就能看到完整效果。代价是文件大约会变成原图总和的 1.33 倍。
+
 ## 文件结构
 
 ```
@@ -58,7 +84,9 @@ lecture-html/
 │   ├── bg-cover.jpg            # 封面背景(克制留白)
 │   └── logo.png                # 圆徽 logo(透明 PNG)
 ├── scripts/
-│   └── generate_images.py      # 一键跑你自己的背景/logo
+│   ├── generate_images.py      # 一键跑你自己的背景/logo
+│   ├── pack.py                 # 把 HTML + 引用的图打成 zip(方便发给别人)
+│   └── inline.py               # 把图内嵌成 base64,产出单文件 HTML
 └── LICENSE                     # MIT
 ```
 

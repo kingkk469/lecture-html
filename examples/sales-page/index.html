@@ -4,400 +4,933 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#060410" />
-<title>乘势 · AI 商业实战课</title>
-<meta name="description" content="899 元 AI 商业实战课，面向小白老板和普通人，学会用 Claude Code、Codex、WorkBuddy、飞书 AI、知识库和常用 AI 工具做出能用的业务成果。" />
+<title>AI 商业实战课</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#05040b; --bg2:#0b0814; --panel:#11101b; --panel2:#171320;
-  --gold:#c8a35c; --gold2:#e8d4a0; --gold3:#f3d678;
-  --red:#b23a31; --paper:#eee5d1; --cream:#d8ceb4; --muted:#91866f;
-  --line:rgba(200,163,92,.28); --line2:rgba(200,163,92,.11);
-  --serif:"Noto Serif SC","STSong",serif;
-  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
-  --num:"Cinzel",Georgia,serif;
-  --side:clamp(20px,7vw,58px);
+  --bg-0:#060410; --bg-1:#0a0817; --bg-2:#100c1f; --bg-3:#15101f;
+  --gold-0:#4a3a1c; --gold-1:#8a6a32; --gold:#c8a35c; --gold-2:#e8d4a0; --gold-3:#f3d678;
+  --red:#a8302c; --red-2:#d84a3a;
+  --paper:#ebe5d5; --cream:#d6cdb3; --muted:#8a8070; --dim:#5c5648;
+  --line:rgba(200,163,92,0.25); --line-d:rgba(200,163,92,0.10);
+  --f-serif:"Noto Serif SC","Source Han Serif SC","STSong","宋体",serif;
+  --f-sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --f-num:"Cinzel","Cormorant Garamond",Georgia,serif;
+  --f-italic:"Cormorant Garamond",Georgia,serif;
+
+  /* 响应式字号(基于 750px 设计稿) */
+  --t-mega: clamp(80px, 22vw, 170px);
+  --t-h1: clamp(28px, 6vw, 44px);         /* sec-title / 印章相关 */
+  --t-h2: clamp(22px, 5vw, 38px);         /* h-sub, t-name */
+  --t-h3: clamp(18px, 3.4vw, 26px);       /* cur-head h3 */
+  --t-h4: clamp(17px, 3vw, 23px);         /* four-title, benefit h4 */
+  --t-claim: clamp(18px, 3.3vw, 24px);
+  --t-price-hero: clamp(40px, 7.5vw, 56px);
+  --t-price-cta: clamp(72px, 17vw, 130px);
+  --t-body: clamp(15px, 2.6vw, 18px);
+  --t-body-sm: clamp(13px, 2.2vw, 16px);
+  --t-tiny: clamp(12px, 1.9vw, 14px);
+  --t-mini: clamp(10px, 1.6vw, 13px);
+
+  /* 间距 */
+  --pad-side: clamp(20px, 8vw, 60px);
+  --pad-v: clamp(50px, 11vw, 90px);
+  --pad-v-hero: clamp(60px, 12vw, 100px);
+  --gap-md: clamp(10px, 2.5vw, 18px);
+  --gap-lg: clamp(30px, 6.5vw, 50px);
 }
+
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.page-bg{position:fixed;inset:0;margin:auto;width:100%;max-width:760px;height:100vh;background:url("img/bg-hero.jpg") center top/contain no-repeat,radial-gradient(ellipse at 50% 12%,#1b1425 0%,#090711 58%,#030207 100%);z-index:0}
-.page{position:relative;z-index:1;max-width:760px;margin:0 auto;background:linear-gradient(180deg,rgba(7,5,15,.55),rgba(6,4,11,.9));overflow:hidden}
-.page:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.36;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.08'/></svg>")}
+html,body{background:#000;color:var(--paper);font-family:var(--f-sans);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+body{
+  background-color:var(--bg-0);
+}
+.page-bg{
+  position:fixed;top:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:750px;height:100vh;
+  background:
+    url('img/bg-hero.jpg') center/contain no-repeat,
+    radial-gradient(ellipse at 50% 40%, #15101f 0%, #0a0817 60%, #060410 100%);
+  pointer-events:none;z-index:0;
+}
+
+.page{
+  width:100%;max-width:750px;margin:0 auto;
+  background:rgba(8,6,20,0.55);
+  position:relative;overflow:hidden;z-index:1;
+}
+.page::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;opacity:0.5;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.06'/></svg>");
+}
 .page>*{position:relative;z-index:2}
-.progress{position:fixed;left:50%;top:0;transform:translateX(-50%);width:100%;max-width:760px;height:3px;background:rgba(255,255,255,.05);z-index:10}
-.progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--red),var(--gold3))}
-.hero{min-height:100vh;padding:66px var(--side) 50px;text-align:center;display:flex;flex-direction:column;justify-content:center}
-.brand{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:30px}
-.brand .ln{height:1px;max-width:88px;flex:1;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.brand .tx{font-family:var(--serif);font-size:12px;color:var(--gold);letter-spacing:.68em;padding-left:.68em}
-.title-card{position:relative;width:min(500px,76vw);margin:0 auto 26px;padding:12px;border:1px solid rgba(200,163,92,.46);background:radial-gradient(ellipse at center,rgba(20,15,30,.68),rgba(7,5,13,.9));box-shadow:0 0 70px rgba(200,163,92,.18),inset 0 0 50px rgba(0,0,0,.45)}
-.title-card img{display:block;width:100%;height:auto;mix-blend-mode:lighten;filter:contrast(1.1) drop-shadow(0 8px 32px rgba(243,214,120,.34))}
-.seal{position:absolute;right:clamp(12px,4vw,38px);top:clamp(68px,12vw,98px);width:clamp(78px,17vw,128px);transform:rotate(-8deg);filter:drop-shadow(0 8px 18px rgba(178,58,49,.36));mix-blend-mode:lighten}
-h1{font-family:var(--serif);font-weight:500;font-size:clamp(31px,7.2vw,52px);line-height:1.28;letter-spacing:.08em;color:var(--gold2);margin:10px 0 16px}
-.hero-lede{font-family:var(--serif);font-size:clamp(17px,3.6vw,24px);line-height:1.9;color:var(--cream);font-weight:300;letter-spacing:.04em}
-.hero-lede strong{color:var(--gold3);font-weight:600}
-.price-strip{margin:30px auto 0;display:inline-flex;align-items:baseline;gap:14px;border:1px solid var(--gold);padding:13px 24px;background:linear-gradient(135deg,#1a1322,#0c0914);box-shadow:0 18px 50px rgba(0,0,0,.28)}
-.price-strip .label{font-family:var(--serif);color:var(--gold2);font-size:14px;letter-spacing:.32em}
-.price-strip .num{font-family:var(--num);font-size:clamp(44px,10vw,70px);font-weight:700;color:var(--gold3);line-height:1}
-.price-strip .unit{color:var(--gold);font-family:var(--serif)}
-.hero-note{margin-top:22px;color:var(--muted);font-size:13px;line-height:1.8}
-.cta-row{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border:1px solid var(--gold);color:#09060c;background:linear-gradient(180deg,var(--gold3),var(--gold));font-family:var(--serif);font-weight:700;letter-spacing:.22em;text-decoration:none}
-.btn.secondary{background:rgba(200,163,92,.06);color:var(--gold2)}
-.section{padding:64px var(--side);border-top:1px solid rgba(200,163,92,.08)}
-.sec-head{text-align:center;margin-bottom:30px}
-.sec-en{font-family:var(--num);font-size:11px;letter-spacing:.55em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
-.sec-title{font-family:var(--serif);font-size:clamp(26px,6.2vw,43px);line-height:1.32;color:var(--gold2);font-weight:500;letter-spacing:.08em}
-.sec-sub{margin-top:12px;color:var(--muted);font-family:var(--serif);font-size:15px;line-height:1.8}
-.diamond{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:18px}
-.diamond:before,.diamond:after{content:"";width:48px;height:1px;background:var(--gold)}
-.diamond span{width:7px;height:7px;background:var(--gold);transform:rotate(45deg)}
-.pain-list,.cards,.benefits{display:flex;flex-direction:column;gap:12px}
-.pain,.card,.benefit,.teacher,.value-box,.guarantee,.aud{position:relative;background:linear-gradient(135deg,rgba(200,163,92,.055),rgba(0,0,0,.28));border:1px solid var(--line);padding:22px}
-.pain{display:flex;gap:18px;border-left:3px solid var(--red)}
-.pain .n,.benefit .n{font-family:var(--num);color:var(--red);font-size:22px;min-width:42px;border-right:1px solid rgba(178,58,49,.36)}
-.pain .t{font-family:var(--serif);line-height:1.85;color:var(--cream);font-size:16px}
-.position{padding:28px;border:1px solid var(--line);background:rgba(0,0,0,.24)}
-.position p{font-family:var(--serif);font-size:18px;line-height:1.95;color:var(--cream)}
-.position strong{color:var(--gold3);font-weight:600}
-.cards{gap:18px}
-.card{padding:24px}
-.card h3{font-family:var(--serif);font-size:22px;color:var(--gold2);margin-bottom:10px;letter-spacing:.04em}
-.card p,.benefit p,.teacher p,.aud li,.value-box p,.guarantee p{font-size:15px;line-height:1.82;color:var(--cream)}
-.tagline{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.tagline span{font-size:12px;color:var(--gold2);border:1px solid var(--line);padding:5px 10px;background:rgba(200,163,92,.04)}
-.curriculum{display:flex;flex-direction:column;gap:28px}
-.chapter{border-top:1px solid var(--line);padding-top:18px}
-.chapter-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px}
-.chapter .vol{font-family:var(--num);font-size:11px;letter-spacing:.34em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
-.chapter h3{font-family:var(--serif);font-size:22px;color:var(--gold2);line-height:1.45;font-weight:600}
-.badge{white-space:nowrap;border:1px solid var(--line);padding:4px 9px;color:var(--gold);font-family:var(--num);font-size:11px;letter-spacing:.1em;margin-top:4px}
-.lessons{display:flex;flex-direction:column;gap:5px}
-.lesson{display:grid;grid-template-columns:48px 1fr;gap:12px;padding:10px 12px;background:rgba(255,255,255,.018)}
-.lesson .num{font-family:var(--num);font-size:13px;color:var(--gold);font-weight:600}
-.lesson .txt{font-size:15px;line-height:1.62;color:var(--cream)}
-.lesson.hot{background:linear-gradient(90deg,rgba(200,163,92,.13),rgba(255,255,255,.018))}
-.note-box{margin-top:14px;color:var(--muted);font-size:13px;line-height:1.75;border-left:2px solid var(--gold);padding-left:12px}
-.benefit{display:flex;gap:16px}
-.benefit .n{color:var(--gold);border-right:1px solid rgba(200,163,92,.32)}
-.benefit h4{font-family:var(--serif);color:var(--gold2);font-size:19px;margin-bottom:6px}
-.teacher{margin-bottom:18px}
-.teacher .name{font-family:var(--serif);font-size:26px;color:var(--gold2);margin-bottom:8px}
-.teacher .meta{font-size:12px;letter-spacing:.18em;color:var(--gold);margin-bottom:14px;text-transform:uppercase}
-.teacher-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-.teacher-tags span{border:1px solid var(--line);color:var(--gold2);font-size:12px;padding:5px 9px}
-.teacher-quote{margin-top:18px;padding:18px;border-left:3px solid var(--gold);background:rgba(0,0,0,.34);font-family:var(--serif);font-size:17px;line-height:1.85;color:var(--gold2)}
-.teacher-quote strong{display:block;color:#fff;font-weight:500;margin-top:6px}
-.aud-grid{display:grid;grid-template-columns:1fr;gap:14px}
-.aud h4{font-family:var(--serif);font-size:21px;color:var(--gold2);margin-bottom:10px}
-.aud ul{padding-left:18px}
-.aud li{margin:6px 0}
-.aud.unfit{border-color:rgba(178,58,49,.45)}
-.value-table{border:1px solid var(--line);background:rgba(0,0,0,.24)}
-.vrow{display:flex;justify-content:space-between;gap:16px;padding:14px 18px;border-bottom:1px solid var(--line2);font-size:15px;color:var(--cream)}
-.vrow:last-child{border-bottom:0}
-.vrow .val{color:var(--gold2);font-family:var(--num);white-space:nowrap}
-.vrow.final{background:rgba(200,163,92,.12);font-weight:700;color:var(--gold3)}
-.guarantee{display:flex;flex-direction:column;gap:10px}
-.guarantee p{padding-left:18px;position:relative}
-.guarantee p:before{content:"";position:absolute;left:0;top:.72em;width:6px;height:6px;background:var(--gold);transform:rotate(45deg)}
-.final-cta{text-align:center;padding:70px var(--side) 92px;border-top:1px solid var(--line);background:radial-gradient(ellipse at 50% 35%,rgba(200,163,92,.13),transparent 58%)}
-.final-cta .top{font-family:var(--num);font-size:12px;color:var(--gold);letter-spacing:.5em;margin-bottom:18px}
-.final-cta .price{font-family:var(--num);font-size:clamp(74px,18vw,132px);color:var(--gold3);line-height:1;font-weight:700;text-shadow:0 0 28px rgba(243,214,120,.24)}
-.final-cta .quote{font-family:var(--serif);font-size:19px;line-height:1.9;color:var(--cream);margin:20px 0 28px}
-.footer{text-align:center;color:var(--muted);font-size:11px;letter-spacing:.22em;padding:22px 18px 96px}
-.floating{position:fixed;left:50%;bottom:14px;transform:translate(-50%,120px);width:calc(100% - 28px);max-width:720px;background:rgba(9,7,16,.92);border:1px solid var(--gold);display:flex;align-items:center;justify-content:space-between;padding:10px 12px;z-index:20;transition:transform .35s ease;backdrop-filter:blur(12px)}
-.floating.show{transform:translate(-50%,0)}
-.floating .p{font-family:var(--num);color:var(--gold3);font-size:27px;font-weight:700}
-.floating small{display:block;font-family:var(--sans);font-size:11px;color:var(--muted);font-weight:400}
-.floating a{min-height:40px;padding:0 18px;font-size:14px}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s cubic-bezier(.22,.61,.36,1)}
+
+/* === 滚动浮现核心 === */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.22,.61,.36,1),transform 1s cubic-bezier(.22,.61,.36,1)}
 .reveal.in{opacity:1;transform:translateY(0)}
-@media (min-width:700px){
-  .aud-grid{grid-template-columns:1fr 1fr}
-  .hero{padding-top:86px}
+.reveal[data-d="1"]{transition-delay:0.08s}
+.reveal[data-d="2"]{transition-delay:0.16s}
+.reveal[data-d="3"]{transition-delay:0.24s}
+.reveal[data-d="4"]{transition-delay:0.32s}
+.reveal[data-d="5"]{transition-delay:0.40s}
+.reveal[data-d="6"]{transition-delay:0.48s}
+
+.scale-in{opacity:0;transform:scale(0.85);transition:opacity 1.2s ease,transform 1.2s cubic-bezier(.22,.61,.36,1)}
+.scale-in.in{opacity:1;transform:scale(1)}
+
+.fade-in{opacity:0;transition:opacity 1.4s ease}
+.fade-in.in{opacity:1}
+
+/* ============ HERO ============ */
+.hero{
+  padding:var(--pad-v-hero) var(--pad-side) calc(var(--pad-v-hero) * 0.7);
+  text-align:center;position:relative;overflow:hidden;
+}
+.brand{display:flex;align-items:center;justify-content:center;gap:clamp(10px,2.4vw,18px);margin-bottom:clamp(40px,7vw,60px)}
+.brand .ln{flex:1;max-width:90px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.brand .tx{font-family:var(--f-serif);color:var(--gold);font-size:var(--t-mini);letter-spacing:1em;font-weight:400;padding-left:1em}
+
+.tt-wrap{
+  display:inline-flex;justify-content:center;align-items:center;
+  margin:0 auto clamp(40px,7vw,56px);position:relative;
+  padding:clamp(8px,2vw,14px);
+  border:1px solid rgba(200,163,92,0.45);
+  background:radial-gradient(ellipse at center,rgba(15,10,25,0.6),rgba(8,7,15,0.85));
+  box-shadow:0 0 70px rgba(200,163,92,0.18),inset 0 0 0 1px rgba(243,214,120,0.10),inset 0 0 40px rgba(0,0,0,0.4);
+}
+.tt-wrap::before,.tt-wrap::after{
+  content:"";position:absolute;width:14px;height:14px;border:1px solid var(--gold-3);
+}
+.tt-wrap::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+.tt-wrap::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+.tt-image{
+  width:clamp(260px,66vw,500px);height:auto;display:block;
+  mix-blend-mode:lighten;
+  filter:contrast(1.15) saturate(1.1) drop-shadow(0 6px 30px rgba(243,214,120,0.35));
+  animation:glow 5s ease-in-out infinite;
+}
+@keyframes glow{0%,100%{filter:drop-shadow(0 4px 24px rgba(200,163,92,0.32))}50%{filter:drop-shadow(0 4px 50px rgba(243,214,120,0.55))}}
+
+.seal{
+  position:absolute;right:clamp(14px,4.5vw,50px);top:clamp(70px,14vw,110px);
+  width:clamp(90px,18vw,140px);height:auto;
+  mix-blend-mode:lighten;
+  transform:rotate(-6deg);
+  filter:drop-shadow(0 6px 14px rgba(168,48,44,0.4));
+  transition:transform 0.6s cubic-bezier(.22,.61,.36,1);
+  animation:seal-drop 0.8s cubic-bezier(.42,1.4,.36,1) 0.6s backwards;
+  z-index:3;display:block;
+}
+.seal:hover{transform:rotate(0deg) scale(1.05)}
+@keyframes seal-drop{
+  0%{opacity:0;transform:rotate(-30deg) scale(1.8)translateY(-40px)}
+  60%{opacity:1;transform:rotate(2deg) scale(1.1)translateY(0)}
+  100%{opacity:1;transform:rotate(-6deg) scale(1)translateY(0)}
+}
+
+.h-sub{font-family:var(--f-serif);font-size:var(--t-h2);letter-spacing:clamp(4px,1.1vw,8px);color:var(--gold-2);margin-bottom:12px;font-weight:300}
+.h-en{font-family:var(--f-num);font-size:var(--t-mini);letter-spacing:clamp(4px,1vw,8px);color:var(--gold);text-transform:uppercase;margin-bottom:clamp(34px,7vw,50px);font-weight:500}
+
+.h-claim{font-family:var(--f-serif);font-size:var(--t-claim);line-height:1.9;color:var(--cream);letter-spacing:clamp(1px,0.4vw,3px);margin-bottom:clamp(40px,7vw,54px);font-weight:300}
+.h-claim .em{color:var(--gold-3);font-weight:500;border-bottom:1px solid var(--gold-3);padding:0 4px 2px}
+
+.scroll{
+  position:relative;border:1px solid var(--gold-1);background:rgba(8,6,15,0.6);
+  padding:clamp(26px,5vw,40px) clamp(22px,5vw,44px);margin:0 0 clamp(40px,7vw,56px);text-align:left;
+}
+.scroll i.tl,.scroll i.tr,.scroll i.bl,.scroll i.br{position:absolute;width:18px;height:18px;border:1px solid var(--gold);display:block}
+.scroll i.tl{top:-1px;left:-1px;border-right:none;border-bottom:none}
+.scroll i.tr{top:-1px;right:-1px;border-left:none;border-bottom:none}
+.scroll i.bl{bottom:-1px;left:-1px;border-right:none;border-top:none}
+.scroll i.br{bottom:-1px;right:-1px;border-left:none;border-top:none}
+.scroll-mark{font-family:var(--f-serif);color:var(--gold);font-size:var(--t-mini);letter-spacing:clamp(5px,1.4vw,10px);margin-bottom:22px;font-weight:500;text-align:center}
+.scroll p{font-family:var(--f-serif);font-size:var(--t-body);line-height:2;color:var(--cream);font-weight:300;margin-bottom:6px}
+.scroll p strong{color:var(--gold-2);font-weight:500}
+.scroll p.big{color:var(--gold-2);font-size:calc(var(--t-body) * 1.15);margin-top:18px;font-weight:500;letter-spacing:1px}
+
+.h-price{
+  display:inline-flex;align-items:center;gap:clamp(14px,3vw,22px);padding:clamp(14px,3vw,20px) clamp(24px,5.5vw,38px);
+  background:linear-gradient(135deg,#1a1322,#0e0a16);border:1px solid var(--gold);position:relative;
+  transition:transform 0.4s ease,box-shadow 0.4s ease;
+}
+.h-price:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(243,214,120,0.25)}
+.h-price i.tl,.h-price i.br{position:absolute;width:18px;height:18px;border:2px solid var(--gold-3);display:block}
+.h-price i.tl{top:-9px;left:-9px;border-right:none;border-bottom:none}
+.h-price i.br{bottom:-9px;right:-9px;border-left:none;border-top:none}
+.h-price .lbl{font-family:var(--f-serif);color:var(--gold-2);font-size:var(--t-body-sm);letter-spacing:clamp(3px,1vw,5px)}
+.h-price .num{font-family:var(--f-num);font-size:var(--t-price-hero);font-weight:700;color:var(--gold-3);line-height:1}
+.h-price .unit{font-family:var(--f-serif);color:var(--gold);font-size:calc(var(--t-body) * 1.1)}
+
+/* ============ SECTION 通用 ============ */
+.section{padding:var(--pad-v) var(--pad-side);position:relative}
+.section + .section{border-top:1px solid rgba(200,163,92,0.06)}
+.sec-head{text-align:center;margin-bottom:var(--gap-lg)}
+.sec-en{font-family:var(--f-num);font-size:var(--t-mini);letter-spacing:clamp(5px,1.6vw,10px);color:var(--gold);text-transform:uppercase;margin-bottom:18px;font-weight:500}
+.sec-title{font-family:var(--f-serif);font-size:var(--t-h1);letter-spacing:clamp(3px,1.4vw,8px);color:var(--gold-2);line-height:1.3;font-weight:400;display:inline-block}
+.sec-sub{margin-top:16px;font-family:var(--f-serif);font-size:var(--t-body-sm);letter-spacing:clamp(2px,0.8vw,4px);color:var(--muted);font-weight:300}
+
+.diamond{display:flex;justify-content:center;align-items:center;gap:14px;margin:20px auto 0}
+.diamond .ln{width:50px;height:1px;background:var(--gold)}
+.diamond .d{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);animation:spin 8s linear infinite}
+@keyframes spin{from{transform:rotate(45deg)}to{transform:rotate(405deg)}}
+
+/* ============ PAIN ============ */
+.pain-list{display:flex;flex-direction:column;gap:clamp(8px,2vw,12px)}
+.pain{
+  display:flex;align-items:flex-start;gap:clamp(14px,3vw,24px);padding:clamp(16px,3.5vw,22px) clamp(18px,4vw,28px);
+  background:rgba(255,255,255,0.018);border-left:2px solid var(--red);position:relative;
+  transition:background 0.4s ease,transform 0.4s ease;
+}
+.pain::after{
+  content:"";position:absolute;top:0;right:0;width:24px;height:24px;
+  border-top:1px solid var(--line);border-right:1px solid var(--line);
+}
+.pain:hover{background:rgba(168,48,44,0.06);transform:translateX(4px)}
+.pain .n{font-family:var(--f-num);color:var(--red-2);font-size:clamp(18px,3.8vw,24px);font-weight:600;letter-spacing:2px;min-width:46px;line-height:1.2;padding-top:4px;border-right:1px solid rgba(168,48,44,0.35);padding-right:14px;margin-right:2px}
+.pain .t{font-family:var(--f-serif);font-size:var(--t-body);line-height:1.75;color:var(--cream);font-weight:300}
+
+.pain-end{margin-top:clamp(36px,6vw,50px);text-align:center;font-family:var(--f-serif)}
+.pain-end p{font-size:calc(var(--t-body) * 1.05);line-height:1.9;color:var(--cream);letter-spacing:2px;font-weight:300}
+.pain-end strong{display:block;margin-top:14px;color:var(--gold-2);font-size:calc(var(--t-h2) * 0.75);letter-spacing:clamp(3px,1.3vw,5px);font-weight:500}
+
+/* ============ FOUR THINGS ============ */
+.four{display:flex;flex-direction:column;gap:clamp(16px,3.5vw,22px)}
+.four-card{
+  position:relative;padding:clamp(28px,5vw,36px) clamp(24px,5vw,36px) clamp(28px,5vw,36px) clamp(90px,17vw,140px);
+  background:linear-gradient(135deg,rgba(200,163,92,0.06) 0%,rgba(0,0,0,0.4) 100%);
+  border:1px solid var(--line);overflow:hidden;
+  transition:transform 0.5s cubic-bezier(.22,.61,.36,1),border-color 0.5s ease,box-shadow 0.5s ease;
+}
+.four-card:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 12px 40px rgba(200,163,92,0.15)}
+.four-card::before{
+  content:"";position:absolute;top:0;left:0;width:clamp(70px,13vw,100px);height:100%;
+  background:linear-gradient(135deg,rgba(200,163,92,0.10),transparent);border-right:1px solid var(--line-d);
+}
+.four-card .num-zh{
+  position:absolute;left:clamp(20px,4vw,30px);top:50%;transform:translateY(-50%);
+  font-family:var(--f-serif);font-size:clamp(36px,7.2vw,54px);color:var(--gold);line-height:1;font-weight:400;
+  transition:transform 0.5s ease;
+}
+.four-card:hover .num-zh{transform:translateY(-50%) scale(1.08)}
+.four-card .num-en{
+  position:absolute;left:clamp(22px,4.2vw,32px);top:clamp(20px,4vw,30px);font-family:var(--f-num);font-size:var(--t-mini);
+  letter-spacing:3px;color:var(--gold-1);font-weight:500;
+}
+.four-title{font-family:var(--f-serif);font-size:var(--t-h4);color:var(--gold-2);letter-spacing:clamp(1px,0.4vw,2px);margin-bottom:10px;font-weight:500}
+.four-desc{font-family:var(--f-sans);font-size:var(--t-body-sm);line-height:1.8;color:var(--cream);font-weight:300}
+
+.four-tail{
+  margin-top:clamp(36px,6vw,48px);padding:clamp(26px,5vw,36px) 30px;text-align:center;position:relative;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.four-tail::before,.four-tail::after{
+  content:"";position:absolute;width:10px;height:10px;border:1px solid var(--gold);
+  background:var(--bg-0);transform:rotate(45deg);left:50%;margin-left:-5px;
+}
+.four-tail::before{top:-5px}.four-tail::after{bottom:-5px}
+.four-tail p{font-family:var(--f-serif);font-size:var(--t-body);line-height:1.8;color:var(--cream);font-weight:300}
+.four-tail strong{display:block;margin-top:10px;color:var(--gold-2);font-size:calc(var(--t-h2) * 0.6);letter-spacing:3px;font-weight:500}
+
+/* ============ CURRICULUM ============ */
+.stage{margin-bottom:clamp(34px,6.5vw,46px)}
+.cur-head{
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  padding-bottom:14px;margin-bottom:20px;border-bottom:1px solid var(--line);flex-wrap:wrap;
+}
+.cur-head .l{display:flex;align-items:baseline;gap:clamp(8px,2vw,14px);flex-wrap:wrap}
+.cur-head .vol{font-family:var(--f-num);font-size:var(--t-mini);letter-spacing:4px;color:var(--gold-1);text-transform:uppercase;font-weight:500}
+.cur-head .star{color:var(--red-2);font-size:calc(var(--t-body) * 1.05);margin-right:4px}
+.cur-head h3{font-family:var(--f-serif);font-size:var(--t-h3);color:var(--gold-2);letter-spacing:clamp(1px,0.6vw,3px);font-weight:500}
+.cur-head .badge{font-family:var(--f-num);font-size:calc(var(--t-mini) * 0.95);letter-spacing:3px;color:var(--gold);padding:4px 12px;border:1px solid var(--line);font-weight:500;white-space:nowrap}
+
+.subhead{display:flex;align-items:center;gap:12px;margin:18px 0 10px}
+.subhead .ln{width:20px;height:1px;background:var(--gold)}
+.subhead .t{font-family:var(--f-serif);color:var(--gold);font-size:var(--t-body-sm);letter-spacing:3px;font-weight:500}
+
+.lessons{display:flex;flex-direction:column;gap:5px}
+.lesson{
+  display:flex;align-items:flex-start;gap:clamp(12px,3vw,18px);padding:clamp(10px,2.4vw,12px) clamp(14px,3.5vw,18px);
+  background:rgba(255,255,255,0.014);
+  position:relative;overflow:hidden;cursor:pointer;
+  transition:background 0.35s ease,transform 0.35s cubic-bezier(.22,.61,.36,1),box-shadow 0.35s ease;
+}
+.lesson::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(90deg,rgba(200,163,92,0.18),transparent);
+  transition:width 0.5s cubic-bezier(.22,.61,.36,1);pointer-events:none;
+}
+.lesson:hover{background:rgba(200,163,92,0.04);transform:translateX(6px);box-shadow:-3px 0 0 var(--gold)}
+.lesson:hover::before{width:100%}
+.lesson:hover .num{color:var(--gold-3)}
+.lesson:hover .txt{color:var(--gold-2)}
+.lesson:active{transform:translateX(6px) scale(0.985);background:rgba(200,163,92,0.10);transition:transform 0.12s ease,background 0.12s ease}
+.lesson .num{font-family:var(--f-num);color:var(--gold);font-size:var(--t-body-sm);min-width:38px;font-weight:600;letter-spacing:0.5px;flex-shrink:0;padding-top:3px;transition:color 0.3s ease}
+.lesson .txt{font-family:var(--f-sans);font-size:var(--t-body);line-height:1.7;color:var(--cream);font-weight:400;transition:color 0.3s ease;position:relative;z-index:1}
+
+/* 免费试看按钮 — 放在第〇章 stage 卡片末尾 */
+.preview-btn{
+  display:flex;align-items:center;justify-content:center;gap:clamp(8px,2vw,14px);
+  margin-top:18px;padding:clamp(13px,3vw,16px) clamp(16px,4vw,22px);
+  border:1px solid var(--gold);background:linear-gradient(180deg,rgba(200,163,92,0.08),rgba(200,163,92,0.02));
+  color:var(--gold-2);text-decoration:none;
+  font-family:var(--f-serif);font-size:var(--t-body-sm);font-weight:500;letter-spacing:0.25em;
+  position:relative;overflow:hidden;
+  transition:all 0.35s ease;
+}
+.preview-btn::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(200,163,92,0.14),transparent 70%);
+  opacity:0;transition:opacity 0.35s ease;
+}
+.preview-btn:hover{
+  background:linear-gradient(180deg,rgba(200,163,92,0.16),rgba(200,163,92,0.05));
+  color:var(--gold-3);border-color:var(--gold-3);letter-spacing:0.3em;
+}
+.preview-btn:hover::before{opacity:1}
+.preview-btn .star{color:var(--gold-3);font-size:1.1em;position:relative;z-index:1}
+.preview-btn .arrow{font-family:var(--f-num);font-weight:600;position:relative;z-index:1}
+.preview-btn .txt{position:relative;z-index:1}
+
+/* ============ 核武器 ============ */
+.weapon-label{
+  display:inline-block;font-family:var(--f-num);font-size:var(--t-mini);letter-spacing:clamp(6px,2vw,10px);
+  color:var(--red-2);padding:7px 24px;border:1px solid var(--red);
+  background:rgba(168,48,44,0.10);margin-bottom:22px;font-weight:500;
+}
+
+.benefits{display:flex;flex-direction:column;gap:clamp(12px,3vw,16px)}
+.benefit{
+  display:flex;gap:clamp(14px,3.5vw,22px);padding:clamp(20px,4.5vw,26px) clamp(20px,4.5vw,30px);
+  background:linear-gradient(135deg,rgba(200,163,92,0.06),rgba(0,0,0,0.3));
+  border:1px solid var(--line);position:relative;
+  transition:transform 0.5s ease,border-color 0.5s ease;
+}
+.benefit:hover{transform:translateY(-2px);border-color:var(--gold)}
+.benefit::before{
+  content:"";position:absolute;top:14px;left:14px;width:5px;height:5px;
+  background:var(--gold);transform:rotate(45deg);
+}
+.benefit .n{font-family:var(--f-num);font-size:clamp(20px,4vw,26px);color:var(--gold);line-height:1;min-width:clamp(42px,8vw,56px);font-weight:600;letter-spacing:2px;padding-top:6px;border-right:1px solid rgba(200,163,92,0.30);padding-right:14px}
+.benefit h4{font-family:var(--f-serif);font-size:var(--t-h4);color:var(--gold-2);letter-spacing:clamp(1px,0.4vw,2px);margin-bottom:8px;font-weight:500}
+.benefit p{font-family:var(--f-sans);font-size:var(--t-body-sm);line-height:1.75;color:var(--cream);font-weight:300}
+
+.daka-list{
+  background:linear-gradient(135deg,rgba(168,48,44,0.07),rgba(0,0,0,0.4));
+  border:1px dashed var(--gold-1);padding:clamp(28px,5vw,36px) clamp(26px,5vw,38px);margin-top:32px;position:relative;
+}
+.daka-pending{font-family:var(--f-serif);color:var(--gold-2);letter-spacing:clamp(5px,1.6vw,8px);font-size:var(--t-body);text-align:center;margin-bottom:22px;font-weight:500}
+.daka-place{font-family:var(--f-sans);color:var(--muted);font-size:var(--t-tiny);line-height:2.4;text-align:center;font-weight:300}
+.daka-tail{margin-top:30px;text-align:center;font-family:var(--f-serif);font-size:var(--t-body-sm);color:var(--gold-2);line-height:1.9;font-weight:300;letter-spacing:1px}
+.daka-tail strong{display:block;margin-top:10px;color:var(--gold-3);font-size:var(--t-body);font-weight:600;letter-spacing:2px}
+
+/* 大咖成员卡片 */
+.daka-member{margin-top:8px;padding:clamp(20px,4.5vw,28px);background:linear-gradient(135deg,rgba(200,163,92,0.10),rgba(0,0,0,0.45));border:1px solid var(--line);border-left:3px solid var(--gold);text-align:left;position:relative}
+.daka-member::before,.daka-member::after{content:"";position:absolute;width:12px;height:12px;border:1px solid var(--gold);display:block}
+.daka-member::before{top:-1px;right:-1px;border-left:none;border-bottom:none}
+.daka-member::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+.daka-name{font-family:var(--f-serif);color:var(--gold-2);font-size:clamp(22px,5vw,30px);letter-spacing:clamp(6px,2vw,12px);font-weight:600;margin-bottom:8px}
+.daka-meta{font-family:var(--f-sans);color:var(--gold);font-size:var(--t-tiny);letter-spacing:2px;margin-bottom:6px;font-weight:400}
+.daka-edu{font-family:var(--f-sans);color:var(--cream);font-size:var(--t-tiny);font-weight:300;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line-d);letter-spacing:1px}
+.daka-exp{list-style:none;padding:0;margin:0}
+.daka-exp li{font-family:var(--f-sans);color:var(--cream);font-size:var(--t-body-sm);line-height:1.75;font-weight:300;padding:8px 0 8px 22px;position:relative}
+.daka-exp li::before{content:"◆";color:var(--gold);position:absolute;left:0;top:9px;font-size:10px}
+.daka-exp strong{color:var(--gold-2);font-weight:500;letter-spacing:0.5px}
+.daka-exp em{display:block;font-style:normal;color:var(--muted);font-size:90%;margin-top:2px;letter-spacing:0.5px}
+.daka-more{margin-top:20px;padding-top:18px;text-align:center;border-top:1px dashed var(--line-d)}
+.daka-more p{font-family:var(--f-serif);color:var(--gold-2);font-size:var(--t-body-sm);font-weight:300;letter-spacing:3px}
+.daka-more p.sub{margin-top:6px;color:var(--muted);font-size:var(--t-tiny);letter-spacing:1px}
+
+/* ============ TEACHER ============ */
+.teacher{
+  position:relative;padding:clamp(36px,7vw,50px) clamp(26px,5.5vw,40px);
+  background:linear-gradient(135deg,rgba(200,163,92,0.08),rgba(0,0,0,0.4));
+  border:1px solid var(--gold);
+}
+.teacher::before{content:"";position:absolute;inset:8px;border:1px solid rgba(200,163,92,0.18);pointer-events:none}
+.t-name{font-family:var(--f-serif);font-size:var(--t-h2);letter-spacing:clamp(5px,1.6vw,10px);color:var(--gold-2);text-align:center;margin-bottom:14px;font-weight:500;position:relative}
+.t-en{font-family:var(--f-num);font-size:var(--t-mini);letter-spacing:6px;color:var(--gold);text-align:center;margin-bottom:30px;font-weight:500}
+.t-tags{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+.t-tag{font-family:var(--f-serif);padding:6px clamp(12px,3vw,16px);border:1px solid var(--line);color:var(--gold-2);font-size:var(--t-tiny);letter-spacing:1px}
+.teacher p{font-family:var(--f-serif);font-size:var(--t-body-sm);line-height:2;color:var(--cream);margin-bottom:6px;font-weight:300}
+.teacher p .em{color:var(--gold-2);font-weight:500}
+.t-quote{
+  margin-top:26px;padding:clamp(20px,4.5vw,28px);background:rgba(0,0,0,0.45);
+  border-left:3px solid var(--gold);font-family:var(--f-serif);font-size:var(--t-body);line-height:1.9;
+  color:var(--gold-2);
+}
+.t-quote .punch{color:#fff;font-size:calc(var(--t-body) * 1.1);letter-spacing:2px;font-weight:500;display:block;margin-top:10px}
+
+/* ============ VALUE ============ */
+.vtable{
+  background:linear-gradient(180deg,rgba(0,0,0,0.5),rgba(0,0,0,0.3));
+  border:1px solid var(--gold);position:relative;
+}
+.vtable i.tl,.vtable i.br{position:absolute;width:14px;height:14px;border:1px solid var(--gold-3);display:block}
+.vtable i.tl{top:-1px;left:-1px;border-right:none;border-bottom:none}
+.vtable i.br{bottom:-1px;right:-1px;border-left:none;border-top:none}
+.vrow{display:flex;justify-content:space-between;align-items:center;padding:clamp(16px,3.6vw,22px) clamp(20px,5vw,32px);border-bottom:1px solid var(--line-d);gap:14px}
+.vrow:last-child{border-bottom:none}
+.vrow .lbl{font-family:var(--f-serif);font-size:var(--t-body-sm);color:var(--cream);font-weight:300;letter-spacing:1px}
+.vrow .lbl strong{color:var(--gold-2);font-weight:500}
+.vrow .val{font-family:var(--f-num);font-size:var(--t-body-sm);color:var(--gold);font-weight:500;letter-spacing:1px;white-space:nowrap}
+.vrow.total{background:rgba(200,163,92,0.12)}
+.vrow.total .lbl{color:var(--gold-2);font-size:var(--t-body);font-weight:600;letter-spacing:4px}
+.vrow.total .val{color:var(--gold-3);font-size:calc(var(--t-body) * 1.4);font-weight:700}
+.vrow.final{background:linear-gradient(90deg,rgba(168,48,44,0.20),rgba(168,48,44,0.10));padding:clamp(22px,4.5vw,28px) clamp(20px,5vw,32px)}
+.vrow.final .lbl{color:#fff;font-size:calc(var(--t-body) * 1.1);font-weight:600;letter-spacing:4px}
+.vrow.final .val{font-family:var(--f-num);color:var(--red-2);font-size:calc(var(--t-h1) * 0.85);font-weight:700}
+
+.v-quote{margin-top:32px;text-align:center;font-family:var(--f-serif);font-size:var(--t-body-sm);line-height:1.95;color:var(--cream);font-weight:300;letter-spacing:1px}
+.v-quote strong{color:var(--gold-2);font-weight:600}
+
+/* ============ AUDIENCE ============ */
+.aud-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,3vw,16px)}
+.aud{padding:clamp(22px,5vw,30px) clamp(18px,4vw,24px);background:rgba(255,255,255,0.018);border:1px solid var(--line)}
+.aud h4{font-family:var(--f-serif);font-size:var(--t-h4);letter-spacing:clamp(3px,1.4vw,6px);padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--line);font-weight:500;text-align:center}
+.aud.fit h4{color:var(--gold-2)}
+.aud.unfit h4{color:var(--muted)}
+.aud ul{list-style:none}
+.aud li{font-family:var(--f-sans);font-size:var(--t-body-sm);line-height:1.9;padding:7px 0;color:var(--cream);font-weight:300}
+.aud.fit li::before{content:"◆ ";color:var(--gold);font-size:0.85em;vertical-align:middle;margin-right:2px}
+.aud.unfit li::before{content:"◇ ";color:var(--muted);font-size:0.85em;vertical-align:middle;margin-right:2px}
+
+/* ============ GUARANTEE ============ */
+.grtee{display:flex;flex-direction:column;gap:14px;padding:clamp(26px,5.5vw,36px);background:rgba(0,0,0,0.4);border:1px solid var(--line)}
+.grtee-item{display:flex;align-items:center;gap:16px;font-family:var(--f-serif);font-size:var(--t-body-sm);color:var(--cream);font-weight:300}
+.grtee-item::before{content:"";width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex-shrink:0}
+
+/* ============ CTA ============ */
+.cta{padding:var(--pad-v-hero) var(--pad-side) calc(var(--pad-v-hero) * 1.1);text-align:center;position:relative;overflow:hidden;
+  background:
+    radial-gradient(80vw 40vw at 50% 50%,rgba(200,163,92,0.16),transparent 70%),
+    radial-gradient(60vw 30vw at 50% 0%,rgba(168,48,44,0.10),transparent 70%),
+    linear-gradient(180deg,#0a0816,#160e24);
+}
+.cta::before,.cta::after{
+  content:"";position:absolute;width:clamp(140px,30vw,240px);height:clamp(140px,30vw,240px);opacity:0.45;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><circle cx='100' cy='100' r='85' stroke='%23c8a35c' stroke-width='0.5' fill='none' opacity='0.4'/><circle cx='100' cy='100' r='70' stroke='%23c8a35c' stroke-width='0.4' fill='none' opacity='0.3'/><path d='M30,90 Q60,60 100,75 T170,90' stroke='%23c8a35c' stroke-width='0.5' fill='none' opacity='0.5'/></svg>");
+  background-size:contain;background-repeat:no-repeat;
+  animation:slow-rotate 60s linear infinite;
+}
+.cta::before{top:30px;left:-30px}
+.cta::after{bottom:30px;right:-30px;transform:rotate(180deg);animation-direction:reverse}
+@keyframes slow-rotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.cta::after{animation:slow-rotate-rev 60s linear infinite}
+@keyframes slow-rotate-rev{from{transform:rotate(180deg)}to{transform:rotate(540deg)}}
+
+.cta-top{font-family:var(--f-num);font-size:var(--t-mini);letter-spacing:clamp(8px,2.4vw,12px);color:var(--gold);margin-bottom:18px;text-transform:uppercase;font-weight:500}
+.cta-badge{
+  display:inline-block;font-family:var(--f-serif);font-size:var(--t-body-sm);
+  letter-spacing:clamp(4px,1.6vw,8px);color:var(--red-2);
+  padding:8px 24px;border:1px solid var(--red);
+  background:rgba(168,48,44,0.12);margin-bottom:24px;font-weight:500;
+  position:relative;animation:badge-pulse 2.4s ease-in-out infinite;
+}
+@keyframes badge-pulse{0%,100%{box-shadow:0 0 0 0 rgba(216,74,58,0.4)}50%{box-shadow:0 0 0 8px rgba(216,74,58,0)}}
+.cta-price{
+  font-family:var(--f-num);font-size:var(--t-price-cta);line-height:1;font-weight:700;
+  background:linear-gradient(135deg,#f3d678,#c8a35c,#f3d678);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:-2px;filter:drop-shadow(0 4px 30px rgba(243,214,120,0.4));
+  position:relative;display:inline-block;
+  animation:price-glow 4s ease-in-out infinite;
+}
+@keyframes price-glow{0%,100%{filter:drop-shadow(0 4px 30px rgba(243,214,120,0.4))}50%{filter:drop-shadow(0 4px 60px rgba(243,214,120,0.75))}}
+.cta-price .yuan{font-family:var(--f-serif);font-size:calc(var(--t-price-cta) * 0.28);color:var(--gold-3);letter-spacing:2px;-webkit-text-fill-color:var(--gold-3);vertical-align:top;margin-left:8px;filter:none}
+.cta-line{width:80px;height:1px;background:var(--gold);margin:38px auto}
+.cta-quote{font-family:var(--f-serif);font-size:var(--t-body);line-height:2;color:var(--gold-2);letter-spacing:clamp(2px,0.8vw,4px);font-weight:300}
+.cta-final{margin-top:18px;font-family:var(--f-serif);font-size:calc(var(--t-h2) * 0.85);letter-spacing:clamp(8px,3vw,14px);color:var(--gold-3);font-weight:600}
+
+.cta-btn{
+  display:inline-block;margin-top:46px;padding:clamp(18px,4vw,24px) clamp(40px,9vw,64px);
+  background:linear-gradient(135deg,#f3d678,#c8a35c);color:#0a0816;
+  font-family:var(--f-serif);font-size:var(--t-h4);font-weight:700;letter-spacing:clamp(4px,1.4vw,6px);
+  text-decoration:none;position:relative;overflow:hidden;
+  box-shadow:0 0 60px rgba(200,163,92,0.4),0 4px 0 var(--gold-0);
+  transition:transform 0.3s ease,box-shadow 0.3s ease;
+}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 0 80px rgba(243,214,120,0.6),0 6px 0 var(--gold-0)}
+.cta-btn:active{transform:translateY(2px);box-shadow:0 0 40px rgba(200,163,92,0.4),0 2px 0 var(--gold-0)}
+.cta-btn::before{
+  content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);
+  transition:left 0.6s ease;
+}
+.cta-btn:hover::before{left:100%}
+
+.footer{padding:28px;text-align:center;background:#06040c;color:var(--dim);font-family:var(--f-num);font-size:var(--t-mini);letter-spacing:6px}
+
+/* 浮动 CTA(手机底部固定栏) */
+.floating-cta{
+  position:fixed;bottom:0;left:0;right:0;z-index:99;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,24px);
+  background:linear-gradient(180deg,rgba(10,8,22,0.85),rgba(10,8,22,0.98));
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:1px solid var(--gold);
+  transform:translateY(100%);transition:transform 0.5s ease;
+}
+.floating-cta.show{transform:translateY(0)}
+.floating-cta .price{font-family:var(--f-num);color:var(--gold-3);font-size:clamp(22px,5.5vw,28px);font-weight:700;line-height:1}
+.floating-cta .price small{font-family:var(--f-serif);font-size:clamp(11px,2.4vw,13px);color:var(--muted);font-weight:300;display:block;letter-spacing:2px;margin-top:2px}
+.floating-cta .btn{
+  background:linear-gradient(135deg,#f3d678,#c8a35c);color:#0a0816;
+  padding:12px clamp(20px,5vw,32px);font-family:var(--f-serif);font-size:clamp(14px,3.4vw,16px);
+  font-weight:700;letter-spacing:3px;text-decoration:none;
+  box-shadow:0 4px 16px rgba(200,163,92,0.4);
+}
+@media (min-width:768px){.floating-cta{display:none}}
+
+/* 顶部滚动进度条 */
+.progress-bar{
+  position:fixed;top:0;left:0;height:3px;width:0;z-index:100;
+  background:linear-gradient(90deg,var(--gold-1),var(--gold-3),var(--gold-2));
+  box-shadow:0 0 8px rgba(243,214,120,0.5);
+  transition:width 0.15s ease-out;
+}
+
+/* 关键词金光呼吸 */
+.h-claim .em{animation:em-pulse 3.6s ease-in-out infinite}
+@keyframes em-pulse{
+  0%,100%{color:var(--gold-3);text-shadow:none}
+  50%{color:var(--gold-2);text-shadow:0 0 12px rgba(243,214,120,0.7)}
+}
+
+.scroll p.big{animation:em-pulse 4s ease-in-out infinite}
+
+/* 暗黑模式 + reduce motion */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01s !important;transition-duration:0.01s !important}
+  .reveal{opacity:1;transform:none}
 }
 </style>
 </head>
 <body>
+<div class="progress-bar" id="progressBar"></div>
 <div class="page-bg"></div>
-<div class="progress"><span id="progressBar"></span></div>
-<main class="page">
+<div class="page">
+
+  <!-- ============ HERO ============ -->
   <section class="hero">
-    <div class="brand"><span class="ln"></span><span class="tx">AI 商业实战课</span><span class="ln"></span></div>
-    <img class="seal" src="img/seal-king.jpg" alt="数字生命 KING 印章" />
-    <div class="title-card"><img src="img/title-chengshi.jpg" alt="乘势" /></div>
-    <h1>不是教你成为工程师<br>是让老板和普通人用 AI 做出东西</h1>
-    <p class="hero-lede">
-      一门给普通人和小白老板的 AI 实战课。带你把 Claude、Codex、WorkBuddy、飞书 AI、知识库和 <strong>Vibe Coding</strong>
-      用到真实工作里，做出文案、表格、会议流程、知识库和业务小工具。
-    </p>
-    <div class="price-strip"><span class="label">现在加入</span><span class="num">899</span><span class="unit">元</span></div>
-    <p class="hero-note">适合小白老板、团队负责人、内容创作者和想把 AI 真正用起来的人。</p>
-    <div class="cta-row">
-      <a class="btn" href="https://56h5e.xetslk.com/s/ch3w3" target="_blank" rel="noopener">立即加入</a>
-      <a class="btn secondary" href="#curriculum">查看课表</a>
+    <div class="brand fade-in"><span class="ln"></span><span class="tx">AI 实 战 课</span><span class="ln"></span></div>
+
+    <div class="tt-wrap fade-in">
+      <div style="font-family:var(--f-serif);font-size:clamp(62px,15vw,118px);line-height:1.22;color:var(--gold-3);letter-spacing:.12em;padding:56px 24px;text-shadow:0 8px 35px rgba(243,214,120,.35);">AI<br>商业实战课</div>
     </div>
+
+    <div class="h-sub reveal" data-d="2">普 通 人 和 小 白 老 板 的 AI 实 战 课</div>
+    <div class="h-en reveal" data-d="3">AI BUSINESS PRACTICE COURSE</div>
+
+    <div class="h-claim reveal" data-d="4">
+      普通人这十年最大的势,<br/>是 <span class="em">A&nbsp;I</span>
+    </div>
+
+    <div class="scroll reveal" data-d="5">
+      <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      <div class="scroll-mark">— 课 程 定 位 —</div>
+      <p>不是教小白老板变成工程师,</p>
+      <p>而是教你把 AI 放进真实工作。</p>
+      <p style="margin-top:18px;">用 Claude、Codex、WorkBuddy、飞书 AI、知识库和 Vibe Coding,</p>
+      <p>做出文案、表格、会议流程、知识库和业务小工具。</p>
+      <p class="big">先做出成果,再理解方法。</p>
+    </div>
+
   </section>
 
+  <!-- ============ 痛点 ============ -->
   <section class="section">
     <div class="sec-head reveal">
-      <div class="sec-en">PAIN</div>
-      <div class="sec-title">你不缺 AI 工具<br>你缺的是一条能跑通的路</div>
-      <div class="diamond"><span></span></div>
+      <div class="sec-en">PAIN POINTS</div>
+      <div class="sec-title">你 是 不 是 正 在 这 样</div>
+      <div class="diamond"><span class="ln"></span><span class="d"></span><span class="ln"></span></div>
     </div>
     <div class="pain-list">
-      <div class="pain reveal"><div class="n">01</div><div class="t">软件装了一堆，团队还是不会用，最后都变成“老板自己在试”。</div></div>
-      <div class="pain reveal"><div class="n">02</div><div class="t">听了很多智能体概念，但一到自己的业务里，不知道从文档、表格、会议还是销售流程切入。</div></div>
-      <div class="pain reveal"><div class="n">03</div><div class="t">想学 Vibe Coding，又怕被复杂工程概念吓退，明明只是想先做出一个能用的小工具。</div></div>
-      <div class="pain reveal"><div class="n">04</div><div class="t">想用 AI 做自媒体，但不知道怎么让它参与选题、拆解、写稿、沉淀知识库和复盘。</div></div>
+      <div class="pain reveal" data-d="1"><div class="n">01</div><div class="t">软件装了一堆,团队还是不会用,最后都变成老板自己在试</div></div>
+      <div class="pain reveal" data-d="2"><div class="n">02</div><div class="t">听了很多智能体概念,一到自己的业务里还是不知道从哪里切入</div></div>
+      <div class="pain reveal" data-d="3"><div class="n">03</div><div class="t">想学 Vibe Coding,又怕一上来就听不懂、做不出来</div></div>
+      <div class="pain reveal" data-d="4"><div class="n">04</div><div class="t">想用 AI 做自媒体,但不知道怎么让它参与选题、拆解、写稿和复盘</div></div>
+      <div class="pain reveal" data-d="5"><div class="n">05</div><div class="t">想把飞书、会议、文档、多维表格用起来,但缺少能照着走的流程</div></div>
+      <div class="pain reveal" data-d="6"><div class="n">06</div><div class="t">买过很多 AI 课,仍然不知道怎么把 AI 放进真实工作流</div></div>
+    </div>
+    <div class="pain-end reveal">
+      <p>如果以上任何一条戳到你 ——</p>
+      <strong>这 门 课 就 是 为 你 做 的</strong>
     </div>
   </section>
 
+  <!-- ============ 四件事 ============ -->
   <section class="section">
     <div class="sec-head reveal">
-      <div class="sec-en">OUTCOME</div>
-      <div class="sec-title">学完你能拿走什么</div>
-      <div class="diamond"><span></span></div>
+      <div class="sec-en">WHAT YOU GET</div>
+      <div class="sec-title">这 门 课 给 你 四 件 事</div>
+      <div class="diamond"><span class="ln"></span><span class="d"></span><span class="ln"></span></div>
+    </div>
+    <div class="four">
+      <div class="four-card reveal" data-d="1"><div class="num-en">No.01</div><div class="num-zh">壹</div><h3 class="four-title">一套小白能上手的 AI 工具流</h3><p class="four-desc">Claude、Codex、WorkBuddy、ima、Obsidian、飞书 AI,讲清每个工具放在哪个工作场景里。</p></div>
+      <div class="four-card reveal" data-d="2"><div class="num-en">No.02</div><div class="num-zh">贰</div><h3 class="four-title">一套 Vibe Coding 入门方法</h3><p class="four-desc">Prompt、CLI、MCP、Skill、Plan、Spec、Goal + Loop,最后从 0 做一个业务小工具。</p></div>
+      <div class="four-card reveal" data-d="3"><div class="num-en">No.03</div><div class="num-zh">叁</div><h3 class="four-title">与 AI 进行自媒体协作案例</h3><p class="four-desc">选题、对标、脚本、短视频文案知识库、生产流水线和复盘方法,讲能直接照着用的流程。</p></div>
+      <div class="four-card reveal" data-d="4"><div class="num-en">No.04</div><div class="num-zh">肆</div><h3 class="four-title">老板用 AI 增利润的案例</h3><p class="four-desc">销售管理、营销、朋友圈文案、会议纪要、待办同步、企业知识库,把 AI 放进团队真实流程里。</p></div>
+    </div>
+    <div class="four-tail reveal">
+      <p>这门课不是堆工具名。</p>
+      <strong>它教你把 AI 变成今天就能用的工作流</strong>
+    </div>
+  </section>
+
+  <!-- ============ 41 节课程 ============ -->
+  <section class="section">
+    <div class="sec-head reveal">
+      <div class="sec-en">CURRICULUM · 41 LESSONS</div>
+      <div class="sec-title">四 十 一 节 · 完 整 目 录</div>
+      <div class="sec-sub">7 个章节 · 从认知到工具 · 再到业务实战</div>
+      <div class="diamond"><span class="ln"></span><span class="d"></span><span class="ln"></span></div>
+    </div>
+
+    <div class="stage reveal">
+      <div class="cur-head"><div class="l"><span class="vol">CHAPTER 0</span><h3>开课导言</h3></div><span class="badge">5 节</span></div>
+      <div class="lessons">
+        <div class="lesson"><span class="num">0.1</span><span class="txt">为什么要学 AI</span></div>
+        <div class="lesson"><span class="num">0.2</span><span class="txt">学习理念和学习路线图</span></div>
+        <div class="lesson gold"><span class="num">0.3</span><span class="txt">Claude Code 安装教程</span></div>
+        <div class="lesson"><span class="num">0.4</span><span class="txt">企业 AI 智能体改造先导课</span></div>
+        <div class="lesson"><span class="num">0.5</span><span class="txt">Codex 零基础教程</span></div>
+      </div>
+      <a class="preview-btn" href="https://kingkk469.github.io/lecture-html/examples/course-01-opening.html" target="_blank" rel="noopener">
+        <span class="star">★</span>
+        <span class="txt">免 费 试 看 · 第 〇 章 完 整 版</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="stage reveal">
+      <div class="cur-head"><div class="l"><span class="vol">CHAPTER I</span><h3>AI 通识和底层逻辑</h3></div><span class="badge">4 节</span></div>
+      <div class="lessons">
+        <div class="lesson"><span class="num">1.1</span><span class="txt">大模型到底是什么</span></div>
+        <div class="lesson"><span class="num">1.2</span><span class="txt">大模型能力边界</span></div>
+        <div class="lesson"><span class="num">1.3</span><span class="txt">三个沟通原则</span></div>
+        <div class="lesson"><span class="num">1.4</span><span class="txt">AI 知识库 / 第二大脑</span></div>
+      </div>
+    </div>
+
+    <div class="stage reveal">
+      <div class="cur-head"><div class="l"><span class="vol">CHAPTER II</span><h3>智能体工具与知识工作流</h3></div><span class="badge">12 节</span></div>
+      <div class="lessons">
+        <div class="lesson"><span class="num">2.1</span><span class="txt">国内外主流大模型全景</span></div>
+        <div class="lesson"><span class="num">2.2</span><span class="txt">本地部署模型</span></div>
+        <div class="lesson"><span class="num">2.3</span><span class="txt">本地模型实操</span></div>
+        <div class="lesson"><span class="num">2.4</span><span class="txt">King 自用 AI 工具清单</span></div>
+        <div class="lesson"><span class="num">2.5</span><span class="txt">如何用上海外大模型</span></div>
+        <div class="lesson"><span class="num">2.6</span><span class="txt">中转站计费原理和模型渠道选择</span></div>
+        <div class="lesson gold"><span class="num">2.7</span><span class="txt">WorkBuddy:桌面端 AI 工作流实战</span></div>
+        <div class="lesson"><span class="num">2.8</span><span class="txt">Claude:通用 AI 助手与长文本协作</span></div>
+        <div class="lesson"><span class="num">2.9</span><span class="txt">Codex:本地电脑里的 AI 操作员</span></div>
+        <div class="lesson"><span class="num">2.10</span><span class="txt">ima:个人知识库与资料问答</span></div>
+        <div class="lesson"><span class="num">2.11</span><span class="txt">Obsidian:个人 / 团队知识沉淀</span></div>
+        <div class="lesson gold"><span class="num">2.12</span><span class="txt">飞书 AI 能力:文档、多维表格、会议、知识库</span></div>
+      </div>
+    </div>
+
+    <div class="stage reveal">
+      <div class="cur-head"><div class="l"><span class="star">★</span><span class="vol">CHAPTER III</span><h3>Vibe Coding 基础入门实战</h3></div><span class="badge">8 节</span></div>
+      <div class="lessons">
+        <div class="lesson"><span class="num">3.1</span><span class="txt">Vibe Coding 到底是什么</span></div>
+        <div class="lesson"><span class="num">3.2</span><span class="txt">Prompt:四段式提示词,把需求说清楚</span></div>
+        <div class="lesson"><span class="num">3.3</span><span class="txt">CLI + MCP + 连接器:让 AI 调用外部工具</span></div>
+        <div class="lesson"><span class="num">3.4</span><span class="txt">Skill:把重复工作封装成固定能力</span></div>
+        <div class="lesson"><span class="num">3.5</span><span class="txt">Plan:先让 AI 拆方案</span></div>
+        <div class="lesson"><span class="num">3.6</span><span class="txt">Spec:把需求写成可执行规格</span></div>
+        <div class="lesson gold"><span class="num">3.7</span><span class="txt">Goal + Loop:让 AI 根据目标全自动开发(/goal、/loop)</span></div>
+        <div class="lesson gold"><span class="num">3.8</span><span class="txt">综合实战:从 0 做一个业务小工具</span></div>
+      </div>
+    </div>
+
+    <div class="stage reveal">
+      <div class="cur-head"><div class="l"><span class="star">★</span><span class="vol">CHAPTER IV</span><h3>与 AI 进行自媒体协作实战案例</h3></div><span class="badge">4 节</span></div>
+      <div class="lessons">
+        <div class="lesson"><span class="num">4.1</span><span class="txt">普通人如何与 AI 协作做自媒体</span></div>
+        <div class="lesson"><span class="num">4.2</span><span class="txt">短视频文案知识库 / 短视频生产流水线</span></div>
+        <div class="lesson gold"><span class="num">4.3</span><span class="txt">对标分析智能体实操案例</span></div>
+        <div class="lesson"><span class="num">4.4</span><span class="txt">博主变现路径:广告 / 带货 / 出课 / 咨询</span></div>
+      </div>
+    </div>
+
+    <div class="stage reveal">
+      <div class="cur-head"><div class="l"><span class="star">★</span><span class="vol">CHAPTER V</span><h3>老板用 AI 赚更多利润</h3></div><span class="badge">6 节</span></div>
+      <div class="lessons">
+        <div class="lesson"><span class="num">5.1</span><span class="txt">AI 降本增效底层逻辑</span></div>
+        <div class="lesson gold"><span class="num">5.2</span><span class="txt">AI 做销售管理</span></div>
+        <div class="lesson"><span class="num">5.3</span><span class="txt">AI 做营销:口播短视频智能体和一键发布助手</span></div>
+        <div class="lesson"><span class="num">5.4</span><span class="txt">朋友圈文案生成器</span></div>
+        <div class="lesson gold"><span class="num">5.5</span><span class="txt">办公智能体:会议纪要 + 待办 + 同步</span></div>
+        <div class="lesson gold"><span class="num">5.6</span><span class="txt">企业知识库智能体:产品手册 + FAQ + 销售经验封装</span></div>
+      </div>
+    </div>
+
+    <div class="stage reveal">
+      <div class="cur-head"><div class="l"><span class="vol">CHAPTER VI</span><h3>元能力 &amp; 持续学习</h3></div><span class="badge">2 节</span></div>
+      <div class="lessons">
+        <div class="lesson"><span class="num">6.1</span><span class="txt">搜商:在 AI 时代怎么问、问什么</span></div>
+        <div class="lesson"><span class="num">6.2</span><span class="txt">用 Claude Code / Codex 学任何新东西</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 实战社 ============ -->
+  <section class="section">
+    <div class="sec-head reveal">
+      <div class="weapon-label">★ 核 武 器 一 ★</div>
+      <div class="sec-title">一 年「实 战 社」</div>
+      <div class="sec-sub">课程是入门 · 实战社是持续跑通的地方</div>
+      <div class="diamond"><span class="ln"></span><span class="d"></span><span class="ln"></span></div>
     </div>
     <div class="benefits">
-      <div class="benefit reveal"><div class="n">01</div><div><h4>一套小白能上手的 AI 工具流</h4><p>从大模型、Claude、Codex、WorkBuddy、ima、Obsidian 到飞书 AI，知道每个工具该放在哪个工作场景里。</p></div></div>
-      <div class="benefit reveal"><div class="n">02</div><div><h4>一套 Vibe Coding 入门方法</h4><p>Prompt、CLI、MCP、Skill、Plan、Spec、Goal + Loop，最后从 0 做一个业务小工具。</p></div></div>
-      <div class="benefit reveal"><div class="n">03</div><div><h4>与 AI 进行自媒体协作的实战案例</h4><p>从选题、对标、脚本、文案知识库到生产流水线，讲清楚普通人怎么把 AI 变成自媒体搭档。</p></div></div>
-      <div class="benefit reveal"><div class="n">04</div><div><h4>老板用 AI 增利润的案例</h4><p>销售管理、营销、朋友圈文案、会议纪要、待办同步、企业知识库，把 AI 放进团队真实流程里。</p></div></div>
+      <div class="benefit reveal" data-d="1"><span class="n">01</span><div><h4>持续答疑</h4><p>学工具、做案例、改流程时遇到问题,有地方继续问、继续改。</p></div></div>
+      <div class="benefit reveal" data-d="2"><span class="n">02</span><div><h4>案例库持续更新</h4><p>学员实操案例、老板提效案例、博主内容案例,持续沉淀成可查的资产。</p></div></div>
+      <div class="benefit reveal" data-d="3"><span class="n">03</span><div><h4>工具变化跟进</h4><p>AI 工具更新很快,课程和社群会继续补充新的入口、流程和用法。</p></div></div>
+      <div class="benefit reveal" data-d="4"><span class="n">04</span><div><h4>一群人一起跑</h4><p>不是听完课就结束,而是持续看别人怎么做,也把自己的问题带进来解决。</p></div></div>
     </div>
   </section>
 
-  <section class="section" id="curriculum">
+  <!-- ============ 大咖团 ============ -->
+  <section class="section">
     <div class="sec-head reveal">
-      <div class="sec-en">CURRICULUM</div>
-      <div class="sec-title">完整课程目录</div>
-      <div class="sec-sub">7 个章节 · 41 节课 · 从认知到工具，再到业务实战</div>
-      <div class="diamond"><span></span></div>
+      <div class="weapon-label">★ 核 武 器 二 ★</div>
+      <div class="sec-title">「大 咖 团」</div>
+      <div class="sec-sub">你不只是买一门课 · 也能看到一线真实经验</div>
+      <div class="diamond"><span class="ln"></span><span class="d"></span><span class="ln"></span></div>
     </div>
-    <div class="curriculum">
-      <div class="chapter reveal">
-        <div class="chapter-head"><div><div class="vol">Chapter 00</div><h3>第〇章｜开课导言</h3></div><span class="badge">5 节</span></div>
-        <div class="lessons">
-          <div class="lesson"><span class="num">0.1</span><span class="txt">为什么要学 AI</span></div>
-          <div class="lesson"><span class="num">0.2</span><span class="txt">学习理念和学习路线图</span></div>
-          <div class="lesson"><span class="num">0.3</span><span class="txt">Claude Code 安装教程</span></div>
-          <div class="lesson"><span class="num">0.4</span><span class="txt">企业 AI 智能体改造先导课</span></div>
-          <div class="lesson"><span class="num">0.5</span><span class="txt">Codex 零基础教程</span></div>
-        </div>
-      </div>
-
-      <div class="chapter reveal">
-        <div class="chapter-head"><div><div class="vol">Chapter 01</div><h3>第一章｜AI 通识和底层逻辑</h3></div><span class="badge">4 节</span></div>
-        <div class="lessons">
-          <div class="lesson"><span class="num">1.1</span><span class="txt">大模型到底是什么</span></div>
-          <div class="lesson"><span class="num">1.2</span><span class="txt">大模型能力边界</span></div>
-          <div class="lesson"><span class="num">1.3</span><span class="txt">三个沟通原则</span></div>
-          <div class="lesson"><span class="num">1.4</span><span class="txt">AI 知识库 / 第二大脑</span></div>
-        </div>
-      </div>
-
-      <div class="chapter reveal">
-        <div class="chapter-head"><div><div class="vol">Chapter 02</div><h3>第二章｜智能体工具与知识工作流</h3></div><span class="badge">12 节</span></div>
-        <div class="lessons">
-          <div class="lesson"><span class="num">2.1</span><span class="txt">国内外主流大模型全景</span></div>
-          <div class="lesson"><span class="num">2.2</span><span class="txt">本地部署模型</span></div>
-          <div class="lesson"><span class="num">2.3</span><span class="txt">本地模型实操</span></div>
-          <div class="lesson"><span class="num">2.4</span><span class="txt">King 自用 AI 工具清单</span></div>
-          <div class="lesson"><span class="num">2.5</span><span class="txt">如何用上海外大模型</span></div>
-          <div class="lesson"><span class="num">2.6</span><span class="txt">中转站计费原理和模型渠道选择</span></div>
-          <div class="lesson hot"><span class="num">2.7</span><span class="txt">WorkBuddy：桌面端 AI 工作流实战</span></div>
-          <div class="lesson"><span class="num">2.8</span><span class="txt">Claude：通用 AI 助手与长文本协作</span></div>
-          <div class="lesson"><span class="num">2.9</span><span class="txt">Codex：本地电脑里的 AI 操作员</span></div>
-          <div class="lesson"><span class="num">2.10</span><span class="txt">ima：个人知识库与资料问答</span></div>
-          <div class="lesson"><span class="num">2.11</span><span class="txt">Obsidian：个人 / 团队知识沉淀</span></div>
-          <div class="lesson hot"><span class="num">2.12</span><span class="txt">飞书 AI 能力：文档、多维表格、会议、知识库</span></div>
-        </div>
-        <div class="note-box">工具篇不堆同类 Agent，重点讲老板和团队今天就能用起来的工具入口和工作流。</div>
-      </div>
-
-      <div class="chapter reveal">
-        <div class="chapter-head"><div><div class="vol">Chapter 03</div><h3>第三章｜Vibe Coding 基础入门实战</h3></div><span class="badge">8 节</span></div>
-        <div class="lessons">
-          <div class="lesson"><span class="num">3.1</span><span class="txt">Vibe Coding 到底是什么</span></div>
-          <div class="lesson"><span class="num">3.2</span><span class="txt">Prompt：四段式提示词，把需求说清楚</span></div>
-          <div class="lesson"><span class="num">3.3</span><span class="txt">CLI + MCP + 连接器：让 AI 调用外部工具</span></div>
-          <div class="lesson"><span class="num">3.4</span><span class="txt">Skill：把重复工作封装成固定能力</span></div>
-          <div class="lesson"><span class="num">3.5</span><span class="txt">Plan：先让 AI 拆方案</span></div>
-          <div class="lesson"><span class="num">3.6</span><span class="txt">Spec：把需求写成可执行规格</span></div>
-          <div class="lesson hot"><span class="num">3.7</span><span class="txt">Goal + Loop：让 AI 根据目标全自动开发（/goal、/loop）</span></div>
-          <div class="lesson hot"><span class="num">3.8</span><span class="txt">综合实战：从 0 做一个业务小工具</span></div>
-        </div>
-        <div class="note-box">Harness Engineering / Loop Engineering 只作为加餐点到，不做复杂工程展开。</div>
-      </div>
-
-      <div class="chapter reveal">
-        <div class="chapter-head"><div><div class="vol">Chapter 04</div><h3>第四章｜与 AI 进行自媒体协作实战案例</h3></div><span class="badge">4 节</span></div>
-        <div class="lessons">
-          <div class="lesson"><span class="num">4.1</span><span class="txt">普通人如何与 AI 协作做自媒体</span></div>
-          <div class="lesson"><span class="num">4.2</span><span class="txt">短视频文案知识库 / 短视频生产流水线</span></div>
-          <div class="lesson hot"><span class="num">4.3</span><span class="txt">对标分析智能体实操案例</span></div>
-          <div class="lesson"><span class="num">4.4</span><span class="txt">博主变现路径：广告 / 带货 / 出课 / 咨询</span></div>
-        </div>
-        <div class="note-box">这一章聚焦“人与 AI 怎么一起做自媒体”，从选题、对标、脚本到发布复盘，讲能直接照着用的协作流程。</div>
-      </div>
-
-      <div class="chapter reveal">
-        <div class="chapter-head"><div><div class="vol">Chapter 05</div><h3>第五章｜老板用 AI 赚更多利润</h3></div><span class="badge">6 节</span></div>
-        <div class="lessons">
-          <div class="lesson"><span class="num">5.1</span><span class="txt">AI 降本增效底层逻辑</span></div>
-          <div class="lesson hot"><span class="num">5.2</span><span class="txt">AI 做销售管理</span></div>
-          <div class="lesson"><span class="num">5.3</span><span class="txt">AI 做营销：口播短视频智能体和一键发布助手</span></div>
-          <div class="lesson"><span class="num">5.4</span><span class="txt">朋友圈文案生成器</span></div>
-          <div class="lesson hot"><span class="num">5.5</span><span class="txt">办公智能体：会议纪要 + 待办 + 同步</span></div>
-          <div class="lesson hot"><span class="num">5.6</span><span class="txt">企业知识库智能体：产品手册 + FAQ + 销售经验封装</span></div>
-        </div>
-      </div>
-
-      <div class="chapter reveal">
-        <div class="chapter-head"><div><div class="vol">Chapter 06</div><h3>第六章｜元能力 &amp; 持续学习</h3></div><span class="badge">2 节</span></div>
-        <div class="lessons">
-          <div class="lesson"><span class="num">6.1</span><span class="txt">搜商：AI 时代怎么问、问什么</span></div>
-          <div class="lesson"><span class="num">6.2</span><span class="txt">用 Claude Code / Codex 学任何新东西</span></div>
-        </div>
-      </div>
+    <div class="benefits">
+      <div class="benefit reveal" data-d="1"><span class="n">01</span><div><h4>一线分享</h4><p>邀请正在用 AI 做业务、做内容、做交付的人,讲实战、讲案例、讲踩坑。</p></div></div>
+      <div class="benefit reveal" data-d="2"><span class="n">02</span><div><h4>真实案例拆解</h4><p>不只听概念,而是看真实场景里 AI 怎么提效、怎么协作、怎么创造结果。</p></div></div>
+      <div class="benefit reveal" data-d="3"><span class="n">03</span><div><h4>不定期 AMA</h4><p>围绕工具更新、企业转型、自媒体协作和老板提效,做内部问答和观察。</p></div></div>
     </div>
+    <p class="daka-tail reveal">
+      <strong>课程教方法,实战社陪你练,大咖团给你看更真实的一线经验。</strong>
+    </p>
   </section>
 
+  <!-- ============ 讲师 ============ -->
   <section class="section">
     <div class="sec-head reveal">
       <div class="sec-en">INSTRUCTORS</div>
-      <div class="sec-title">讲师团队</div>
-      <div class="diamond"><span></span></div>
+      <div class="sec-title">讲 师 团 队</div>
+      <div class="diamond"><span class="ln"></span><span class="d"></span><span class="ln"></span></div>
     </div>
     <div class="teacher reveal">
-      <div class="name">施 键 金</div>
-      <div class="meta">SHI JIAN JIN · 数字生命 KING</div>
-      <div class="teacher-tags"><span>前微信视频号高级产品运营</span><span>在线教育公司一号位</span><span>AI 内容博主</span></div>
-      <p>大厂出身，懂产品也懂运营。</p>
-      <p>出来后做一号位，亲手操盘 <strong>商业 · 增长 · 教育</strong> 三件事。</p>
-      <p>同时，我也是一个把 AI 用进每天工作和内容生产的实战者。</p>
-      <p>内容怎么靠 AI 做爆款、业务怎么靠 AI 提效率、副业怎么靠 AI 做起来，这些不是旁观者视角，而是我自己每天在做的事。</p>
-      <div class="teacher-quote">我教的每一步，我自己都在做。<strong>不是 AI 工程师讲技术，是商业操盘手讲实战。</strong></div>
-    </div>
-    <div class="teacher reveal">
-      <div class="name">Joe</div>
-      <div class="meta">协同主讲 · 企业 AI 化专家</div>
-      <div class="teacher-tags"><span>QS 前 5% 人工智能硕士</span><span>辅导数十家企业 AI 转型</span><span>第一批 FDE 从业者</span></div>
-      <p>Joe 会把企业 AI 转型里真正跑得通的方法拆给你看：从工具接入、流程梳理，到让团队开始用 AI 交付结果。</p>
-      <div class="teacher-quote">挖掘企业 AI 转型最短路径。<strong>分享转型 AI 路上的真实案例。</strong></div>
-    </div>
-    <div class="teacher reveal">
-      <div class="name">聪 哥</div>
-      <div class="meta">协同主讲 · 企业 AI 落地实战</div>
-      <div class="teacher-tags"><span>某互联网大厂 AI 业务负责人</span><span>规模化交付实战</span><span>企业 AI 真正跑出 ROI 的人</span></div>
-      <p>聪哥长期在企业一线做 AI 业务落地，熟悉从方案设计到规模化交付的完整链路。</p>
-      <p>这次课程里，AI 的专业知识和企业的实战案例，会由他来讲。</p>
-      <div class="teacher-quote">在企业里真把 AI 做成规模化交付的人。<strong>他讲企业落地，KING 讲个人与内容实战，视角互补。</strong></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="sec-head reveal">
-      <div class="sec-en">FOR WHOM</div>
-      <div class="sec-title">适合谁<br>不适合谁</div>
-      <div class="diamond"><span></span></div>
-    </div>
-    <div class="aud-grid">
-      <div class="aud reveal">
-        <h4>适合你</h4>
-        <ul>
-          <li>想让团队真正开始用 AI 的小白老板</li>
-          <li>想用 Claude Code / Codex 做业务小工具的人</li>
-          <li>想做 AI 内容、短视频、知识库和运营提效的人</li>
-          <li>买过很多 AI 课，但仍然不知道怎么落地的人</li>
-        </ul>
+      <div class="t-name">施 键 金</div>
+      <div class="t-en">SHI JIAN JIN · 数字生命 KING</div>
+      <div class="t-tags">
+        <span class="t-tag">前微信视频号高级产品运营</span>
+        <span class="t-tag">在线教育公司一号位</span>
+        <span class="t-tag">AI 内容博主</span>
       </div>
-      <div class="aud unfit reveal">
-        <h4>不适合你</h4>
-        <ul>
-          <li>只想听高深技术架构、不想动手做案例的人</li>
-          <li>期待一夜暴富、不愿意动手实操的人</li>
-          <li>只想囤工具名、不想改真实工作流的人</li>
-        </ul>
+      <p>大厂出身,懂产品也懂运营。</p>
+      <p>出来后做一号位,亲手操盘 <span class="em">商业 · 增长 · 教育</span> 三件事。</p>
+      <p style="margin-top:14px;">同时,我也是一个把 AI 用进每天工作和内容生产的实战者:</p>
+      <p>内容怎么靠 AI 做爆款、业务怎么靠 AI 提效率、副业怎么靠 AI 做起来 ——</p>
+      <div class="t-quote">
+        我教的每一步,我自己都在做。
+        <span class="punch">不是 AI 工程师讲技术 · 是商业操盘手讲实战</span>
+      </div>
+    </div>
+
+    <div class="teacher reveal" style="margin-top:36px">
+      <div class="t-name">Joe</div>
+      <div class="t-en">协 同 主 讲 · 企 业 AI 化 专 家</div>
+      <div class="t-tags">
+        <span class="t-tag">QS 前 5% 人工智能硕士</span>
+        <span class="t-tag">辅导数十家企业 AI 转型</span>
+        <span class="t-tag">第一批 FDE 从业者</span>
+      </div>
+      <p>Joe 会把企业 AI 转型里真正跑得通的方法拆给你看。</p>
+      <p style="margin-top:14px;">从工具接入、流程梳理,到让团队开始用 AI 交付结果,讲转型路上的真实案例。</p>
+      <div class="t-quote">
+        挖掘企业 AI 转型最短路径。
+        <span class="punch">分享转型 AI 路上的真实案例</span>
+      </div>
+    </div>
+
+    <div class="teacher reveal" style="margin-top:36px">
+      <div class="t-name">聪 哥</div>
+      <div class="t-en">协 同 主 讲 · 企 业 AI 落 地 实 战</div>
+      <div class="t-tags">
+        <span class="t-tag">某互联网大厂 · AI 业务负责人</span>
+        <span class="t-tag">规模化交付实战</span>
+        <span class="t-tag">企业 AI 真正跑出 ROI 的人</span>
+      </div>
+      <p>聪哥长期在企业一线做 AI 业务落地,熟悉从方案设计到规模化交付的完整链路。</p>
+      <p style="margin-top:14px;">课程里,企业 AI 落地、降本增效、销售管理和企业知识库案例,会由他拆给你看。</p>
+      <div class="t-quote">
+        在企业里真把 AI 做<span style="color:#fff;font-weight:600;letter-spacing:1px">规模化交付</span>的人。
+        <span class="punch">他讲企业落地 · KING 讲个人与内容实战 · 视角互补</span>
       </div>
     </div>
   </section>
 
+  <!-- ============ 价值表 ============ -->
   <section class="section">
     <div class="sec-head reveal">
       <div class="sec-en">VALUE</div>
-      <div class="sec-title">为什么是 899</div>
-      <div class="diamond"><span></span></div>
+      <div class="sec-title">为 什 么 是 899</div>
+      <div class="diamond"><span class="ln"></span><span class="d"></span><span class="ln"></span></div>
     </div>
-    <div class="value-table reveal">
-      <div class="vrow"><span>41 节体系化课程</span><span class="val">从认知到工具到实战</span></div>
-      <div class="vrow"><span>工具工作流课</span><span class="val">今天就能用</span></div>
-      <div class="vrow"><span>Vibe Coding 实战课</span><span class="val">做出小工具</span></div>
-      <div class="vrow"><span>老板增利润案例</span><span class="val">销售 / 营销 / 办公 / 知识库</span></div>
-      <div class="vrow"><span>实战社持续陪跑</span><span class="val">答疑 / 案例 / 更新</span></div>
-      <div class="vrow"><span>大咖团一线分享</span><span class="val">真实经验</span></div>
-      <div class="vrow final"><span>现在加入</span><span class="val">899 元</span></div>
+    <div class="vtable reveal">
+      <i class="tl"></i><i class="br"></i>
+      <div class="vrow"><span class="lbl">41 节体系化正课</span><span class="val">从认知到实战</span></div>
+      <div class="vrow"><span class="lbl"><strong>工具工作流课</strong></span><span class="val">今天就能用</span></div>
+      <div class="vrow"><span class="lbl">Vibe Coding 实战课</span><span class="val">做出小工具</span></div>
+      <div class="vrow"><span class="lbl">实战社持续陪跑</span><span class="val">答疑 / 案例 / 更新</span></div>
+      <div class="vrow"><span class="lbl">大咖团一线分享</span><span class="val">真实经验</span></div>
+      <div class="vrow total"><span class="lbl">适 合 人 群</span><span class="val">普通人 / 小白老板</span></div>
+      <div class="vrow final"><span class="lbl">现 在 加 入</span><span class="val">899 元</span></div>
+    </div>
+    <p class="v-quote reveal">
+      一门课,把工具入口、实战案例和持续学习方法串起来<br/>
+      <strong>先把 AI 用起来,再让它帮你改流程、提效率、做成果</strong>
+    </p>
+  </section>
+
+  <!-- ============ 适合谁 ============ -->
+  <section class="section">
+    <div class="sec-head reveal">
+      <div class="sec-en">FOR WHOM</div>
+      <div class="sec-title">这 门 课 适 合 谁</div>
+      <div class="diamond"><span class="ln"></span><span class="d"></span><span class="ln"></span></div>
+    </div>
+    <div class="aud-grid">
+      <div class="aud fit reveal" data-d="1">
+        <h4>适 合 你</h4>
+        <ul>
+          <li>想做 AI 博主、用 AI 赚副业的普通人</li>
+          <li>想接 AI 改造单做自由职业(开发 / 咨询 / 设计)</li>
+          <li>想用 AI 提效赚更多利润的中小企业老板</li>
+          <li>买过其他 AI 课但没收获的人</li>
+          <li>想跑通 AI 赚钱路径的人</li>
+        </ul>
+      </div>
+      <div class="aud unfit reveal" data-d="2">
+        <h4>不 适 合</h4>
+        <ul>
+          <li>想找一夜暴富秘籍的人</li>
+          <li>不愿意动手实操的人</li>
+          <li>只想白嫖工具教程的人</li>
+        </ul>
+      </div>
     </div>
   </section>
 
+  <!-- ============ 保障 ============ -->
   <section class="section">
     <div class="sec-head reveal">
       <div class="sec-en">GUARANTEE</div>
-      <div class="sec-title">报名保障</div>
-      <div class="diamond"><span></span></div>
+      <div class="sec-title">报 名 保 障</div>
+      <div class="diamond"><span class="ln"></span><span class="d"></span><span class="ln"></span></div>
     </div>
-    <div class="guarantee reveal">
-      <p>一年实战社陪跑：持续答疑、案例沉淀、工具更新。</p>
-      <p>大咖团一线分享：看到真实业务里的 AI 经验。</p>
-      <p>适合反复回来查方法、看案例、照着做。</p>
+    <div class="grtee reveal">
+      <div class="grtee-item">一年「实战社」陪跑:持续答疑、案例沉淀、工具更新</div>
+      <div class="grtee-item">「大咖团」一线分享:看到真实业务里的 AI 经验</div>
+      <div class="grtee-item">7 天内不满意,无条件退款</div>
     </div>
   </section>
 
-  <section class="final-cta">
-    <div class="top reveal">CHENG SHI NOW</div>
-    <div class="price reveal">899</div>
-    <div class="quote reveal">虽有智慧，不如乘势。<br>普通人和小白老板，不需要先变成工程师，先把 AI 用起来。</div>
-    <a class="btn reveal" href="https://56h5e.xetslk.com/s/ch3w3" target="_blank" rel="noopener">立即加入</a>
+  <!-- ============ CTA ============ -->
+  <section class="cta">
+    <div class="cta-top reveal">AI · BUSINESS · NOW</div>
+    <div class="cta-badge reveal" data-d="1">★ 新 课 首 发 · 限 时 特 惠 ★</div>
+    <div class="cta-price reveal" data-d="2" id="cta-price"><span id="cta-num">5000</span><span class="yuan">元</span></div>
+    <div class="cta-line reveal" data-d="3"></div>
+    <div class="cta-quote reveal" data-d="3">
+      不 是 让 你 成 为 工 程 师<br/>
+      是 让 你 用 AI 做 出 东 西
+    </div>
+    <div class="cta-final reveal" data-d="4">现 在 开 始</div>
+    <a class="cta-btn reveal" data-d="5" href="https://56h5e.xetslk.com/s/ch3w3" target="_blank" rel="noopener" id="cta-btn">立 即 加 入</a>
   </section>
 
-  <div class="footer">乘势 · AI 商业实战课 · 数字生命 KING</div>
-</main>
+  <div class="footer">AI 商业实战课 · 数字生命 KING · MMXXVI</div>
+</div>
 
-<div class="floating" id="floatCta">
-  <div class="p">¥899<small>AI 商业实战课</small></div>
-  <a class="btn" href="https://56h5e.xetslk.com/s/ch3w3" target="_blank" rel="noopener">加入</a>
+<!-- 浮动底部 CTA(手机端) -->
+<div class="floating-cta" id="floatCta">
+  <div class="price">¥899<small>原价 5000+</small></div>
+  <a class="btn" href="https://56h5e.xetslk.com/s/ch3w3" target="_blank" rel="noopener">立 即 加 入</a>
 </div>
 
 <script>
+// 滚动浮现
 const io = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("in");
-      io.unobserve(entry.target);
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
     }
   });
-}, { threshold: 0.08, rootMargin: "0px 0px -60px 0px" });
-document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+}, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
 
-const floatCta = document.getElementById("floatCta");
-const progress = document.getElementById("progressBar");
-let ticking = false;
-window.addEventListener("scroll", () => {
-  if (window.scrollY > window.innerHeight * 0.75) floatCta.classList.add("show");
-  else floatCta.classList.remove("show");
-  if (ticking) return;
-  ticking = true;
+document.querySelectorAll('.reveal, .scale-in, .fade-in').forEach(el => io.observe(el));
+
+// 浮动 CTA 显示控制(滚过首屏后显示)
+const floatCta = document.getElementById('floatCta');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > window.innerHeight * 0.8) {
+    floatCta.classList.add('show');
+  } else {
+    floatCta.classList.remove('show');
+  }
+}, { passive: true });
+
+// 顶部滚动进度条
+const pb = document.getElementById('progressBar');
+let pbTicking = false;
+window.addEventListener('scroll', () => {
+  if (pbTicking) return;
+  pbTicking = true;
   requestAnimationFrame(() => {
-    const doc = document.documentElement;
-    const max = doc.scrollHeight - doc.clientHeight;
-    progress.style.width = max > 0 ? `${(doc.scrollTop / max) * 100}%` : "0%";
-    ticking = false;
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const ratio = max > 0 ? h.scrollTop / max : 0;
+    pb.style.width = (ratio * 100) + '%';
+    pbTicking = false;
   });
 }, { passive: true });
+
+// 价格数字: 从 5000 降到 899 + 弹动
+const priceEl = document.getElementById('cta-price');
+const priceNum = document.getElementById('cta-num');
+function animateNum(el, from, to, dur) {
+  const start = performance.now();
+  function tick(t) {
+    const p = Math.min((t - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(from + (to - from) * eased);
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = to;
+  }
+  requestAnimationFrame(tick);
+}
+const priceObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateNum(priceNum, 5000, 899, 1800);
+      e.target.style.animation = 'none';
+      void e.target.offsetWidth;
+      e.target.style.animation = 'price-glow 4s ease-in-out infinite, bounce 0.8s cubic-bezier(.42,1.4,.36,1)';
+      priceObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+if (priceEl) priceObs.observe(priceEl);
+
+// 注入 bounce 关键帧
+const style = document.createElement('style');
+style.textContent = `@keyframes bounce{0%{transform:scale(0.6)}55%{transform:scale(1.08)}100%{transform:scale(1)}}`;
+document.head.appendChild(style);
 </script>
 </body>
 </html>
